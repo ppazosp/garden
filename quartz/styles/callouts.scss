@@ -2,10 +2,9 @@
 @use "sass:color";
 
 .callout {
-  border: none;
-  border-left: 2px solid var(--border);
-  background-color: transparent;
-  border-radius: 0;
+  border: 1px solid var(--border);
+  background-color: var(--bg);
+  border-radius: 5px;
   padding: 0 1rem;
   overflow-y: hidden;
   box-sizing: border-box;
@@ -101,13 +100,14 @@
     margin: 0;
   }
 
-  .callout-icon,
+  .callout-icon {
+    display: none;
+  }
+
   & .fold-callout-icon {
     width: var(--icon-size);
     height: var(--icon-size);
     flex: 0 0 var(--icon-size);
-
-    // icon support
     background-size: var(--icon-size) var(--icon-size);
     background-position: center;
     background-color: var(--color);
