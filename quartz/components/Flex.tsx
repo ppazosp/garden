@@ -38,7 +38,7 @@ export default ((config: FlexConfig) => {
 
           return (
             <div
-              style={`flex-grow: ${grow}; flex-shrink: ${shrink}; flex-basis: ${basis}; order: ${order}; align-self: ${align}; justify-self: ${justify};`}
+              style={`flex-grow: ${grow}; flex-shrink: ${shrink}; flex-basis: ${basis}; order: ${order}; align-self: ${align}; justify-self: ${justify}; display: flex; align-items: center;`}
             >
               <c.Component {...props} />
             </div>
