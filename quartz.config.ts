@@ -18,8 +18,8 @@ const config: QuartzConfig = {
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "published",
     theme: {
-      fontOrigin: "googleFonts",
-      cdnCaching: true,
+      fontOrigin: "local",
+      cdnCaching: false,
       typography: {
         header: "Satoshi",
         body: "Satoshi",
@@ -86,8 +86,7 @@ const config: QuartzConfig = {
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
-      // Comment out CustomOgImages to speed up build time
-      // Plugin.CustomOgImages(), // disabled: Satoshi not on Google Fonts, re-enable after self-hosting (Task 3)
+      // Plugin.CustomOgImages(), // disabled: CustomOgImages fetches fonts remotely regardless of fontOrigin: "local"
     ],
   },
 }
