@@ -16,36 +16,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Bona Nova";
-  src: url("/static/fonts/BonaNova-Italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-h1, h2, h3, h4, h5, h6,
-.page-title,
-.folder-title {
-  font-style: italic;
-}
-
-a.internal,
-a.external {
-  font-family: var(--headerFont);
-  font-style: italic;
-}
-
-.explorer ul li > a {
-  font-family: var(--headerFont);
-  font-style: italic;
-}
-
-.breadcrumb-container {
-  font-family: var(--headerFont);
-  font-style: italic;
-}
-
 // Theme toggle animation (View Transitions API)
 ::view-transition-old(root),
 ::view-transition-new(root) {
