@@ -9,12 +9,12 @@ import * as Plugin from "./quartz/plugins"
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "ppazosp",
-    pageTitleSuffix: " | ppazosp.dev",
+    pageTitleSuffix: " | garden.ppazosp.dev",
     enableSPA: true,
     enablePopovers: true,
     analytics: null,
     locale: "en-US",
-    baseUrl: "ppazosp.dev",
+    baseUrl: "garden.ppazosp.dev",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "published",
     theme: {
