@@ -21,7 +21,7 @@ const config: QuartzConfig = {
       fontOrigin: "local",
       cdnCaching: false,
       typography: {
-        header: "Satoshi",
+        header: "Bona Nova",
         body: "Satoshi",
         code: "JetBrains Mono",
       },
