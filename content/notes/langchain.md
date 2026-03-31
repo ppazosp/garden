@@ -33,5 +33,5 @@ graph.add_conditional_edges("act", should_continue)
 
 ## Related
 
-- [[garden/agents/planning-patterns|Planning Patterns]]
-- [[garden/agents/tool-use|Tool Use]]
+- [[planning-patterns|Planning Patterns]]
+- [[tool-use|Tool Use]]

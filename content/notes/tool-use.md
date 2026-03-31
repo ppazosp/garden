@@ -28,5 +28,5 @@ The model receives a list of tool definitions (name, description, input schema).
 
 ## Related
 
-- [[garden/agents/what-are-agents|What Are AI Agents?]]
-- [[garden/tools/index|Tools & Frameworks]]
+- [[what-are-agents|What Are AI Agents?]]
+- [[langchain|LangChain]], [[mcp|MCP]]

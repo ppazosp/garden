@@ -8,4 +8,4 @@ tags:
 
 This is my digital garden where I share notes and ideas about AI Agents and related topics.
 
-I'll be publishing polished posts here and linking to my [[garden/index|garden]] for raw notes and work-in-progress ideas.
+I'll be publishing polished posts here and linking to my [[notes/index|notes]] for raw notes and work-in-progress ideas.

@@ -50,4 +50,4 @@ Act: search(query="AAPL stock price today")
 
 ## Related Notes
 
-See [[garden/llms/prompt-templates|Prompt Templates]] for reusable template patterns you can drop into your projects.
+See [[prompt-templates|Prompt Templates]] for reusable template patterns you can drop into your projects.

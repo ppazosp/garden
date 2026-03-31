@@ -6,6 +6,6 @@ Welcome to my digital garden — a collection of notes, ideas, and posts about A
 
 ## Explore
 
-- [[garden/index|Garden]] — raw notes and ideas
+- [[notes/index|Notes]] — raw notes and ideas
 - [[posts/index|Posts]] — polished articles
 - [[about|About]]

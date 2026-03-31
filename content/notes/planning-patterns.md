@@ -40,5 +40,5 @@ Best for: workflows with parallel workstreams or tasks requiring deep specializa
 
 ## Related
 
-- [[garden/agents/what-are-agents|What Are AI Agents?]]
-- [[garden/agents/tool-use|Tool Use]]
+- [[what-are-agents|What Are AI Agents?]]
+- [[tool-use|Tool Use]]

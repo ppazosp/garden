@@ -44,9 +44,9 @@ def run_agent(goal: str, tools: list[Tool]) -> str:
 
 ## Architecture Patterns
 
-See [[garden/agents/planning-patterns|Planning Patterns]] for a breakdown of ReAct, Plan-and-Execute, and reflection loops.
+See [[planning-patterns|Planning Patterns]] for a breakdown of ReAct, Plan-and-Execute, and reflection loops.
 
-For a deep dive on tools, see [[garden/agents/tool-use|Tool Use]].
+For a deep dive on tools, see [[tool-use|Tool Use]].
 
 ## What to Build First
 

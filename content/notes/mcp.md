@@ -38,4 +38,4 @@ Many popular MCP servers are already available: filesystem, web search, GitHub, 
 
 ## Related
 
-- [[garden/agents/tool-use|Tool Use in AI Agents]]
+- [[tool-use|Tool Use in AI Agents]]

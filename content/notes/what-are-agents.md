@@ -13,4 +13,4 @@ Key components:
 - **Memory** — retaining context across interactions
 - **Reflection** — evaluating and correcting own output
 
-Related: [[garden/tools/index|Tools]]
+Related: [[mcp|MCP]], [[tool-use|Tool Use]]
