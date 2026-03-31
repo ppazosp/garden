@@ -16,4 +16,16 @@
   font-display: swap;
 }
 
-// put your custom CSS here!
+@font-face {
+  font-family: "Bona Nova";
+  src: url("/static/fonts/BonaNova-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+h1, h2, h3, h4, h5, h6,
+.page-title,
+.folder-title {
+  font-style: italic;
+}
