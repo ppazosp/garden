@@ -14,15 +14,17 @@ title: Home
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
-Hey, I'm Pablo. This is my digital garden — a place where I collect notes, ideas, and write about AI Agents, LLMs, and the tools around them.
+Hey, I'm Pablo — CS student finishing up at USC, CTO & AI Engineer at [OSIX Tech](https://osix.tech), and someone who genuinely loves solving problems.
 
-Some things here are quick notes from posts I find interesting. Others are longer, more thought-out pieces I share on social media.
+This is my digital garden. I dump here stuff I find interesting — quick notes from posts on X or LinkedIn, ideas about AI agents, automation, open source, startups, and whatever else catches my attention. When something matures enough, I write it up properly and share it.
+
+Nothing here is polished unless it's in Posts. That's the point.
 
 ## Explore
 
-- [[notes/index|Notes]] — quick notes and summaries
-- [[posts/index|Posts]] — polished articles
-- [[about|About]]
+- [[notes/index|Notes]] — quick takes and summaries
+- [[posts/index|Posts]] — the stuff I actually finished writing
+- [[about|About me]]
 
 ## Find me
 
