@@ -2,7 +2,7 @@
 title: Home
 ---
 
-<pre>
+```
                                ....
                            ,;;'''';;,                    ,;;;;,
                  ,        ;;'      `;;,               .,;;;'   ;
@@ -36,7 +36,7 @@ title: Home
                                                        .;;;;'
                                                       ;;;;;'
                                                      ,;;;;'
-</pre>
+```
 
 Hey, I'm Pablo. This is my digital garden — a place where I collect notes, ideas, and write about AI Agents, LLMs, and the tools around them.
 
