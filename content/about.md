@@ -4,11 +4,11 @@ title: About
 
 I'm Pablo Pazos Parada, from Santiago de Compostela.
 
-I'm finishing my CS degree at USC (Universidade de Santiago de Compostela) — wrapping up in July 2026. In parallel, I co-founded [OSIX Tech](https://osix.tech) with 6 classmates after seeing the massive gap between what AI can do and what's actually being used in the real world. I work there as CTO and AI Engineer.
+Finishing my CS degree at USC this July. I also co-founded [OSIX Tech](https://osix.tech) with 6 classmates last year. We saw that most companies barely use AI beyond chatbots, so we help them actually implement it. I'm the CTO and do most of the AI engineering.
 
-I like building things, breaking things, and figuring out how stuff works. AI agents, automation, DevOps, open source, startups — if it's a problem worth solving, I'm probably interested.
+I like fixing things more than building them from scratch, if I'm honest. Give me a broken system and I'm happy. AI agents, infra, automation, open source, whatever. If it's broken or could be better, I want to look at it.
 
-This garden is where I think out loud. Some notes are rough summaries of things I read. Others are ideas I'm still chewing on. The [[posts/index|posts]] are the ones I've actually sat down and written properly.
+This garden is where I keep notes on things I read and ideas I'm working through. Some of it is half-baked. The [[posts/index|posts]] are the ones where I tried harder.
 
 ## Find me
 

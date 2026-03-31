@@ -14,16 +14,16 @@ title: Home
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
-Hey, I'm Pablo — CS student finishing up at USC, CTO & AI Engineer at [OSIX Tech](https://osix.tech), and someone who genuinely loves solving problems.
+I'm Pablo. CS student at USC, CTO at [OSIX Tech](https://osix.tech).
 
-This is my digital garden. I dump here stuff I find interesting — quick notes from posts on X or LinkedIn, ideas about AI agents, automation, open source, startups, and whatever else catches my attention. When something matures enough, I write it up properly and share it.
+I collect stuff here. Sometimes it's a quick note on a post I saw on X, sometimes it's something I actually sat down and wrote. The notes are rough. The [[posts/index|posts]] less so.
 
-Nothing here is polished unless it's in Posts. That's the point.
+Mostly AI agents, automation, and whatever I'm trying to figure out at the time.
 
 ## Explore
 
 - [[notes/index|Notes]] — quick takes and summaries
-- [[posts/index|Posts]] — the stuff I actually finished writing
+- [[posts/index|Posts]] — the finished ones
 - [[about|About me]]
 
 ## Find me
