@@ -9,14 +9,13 @@
 }
 
 .breadcrumb-element {
-  p {
-    margin: 0;
-    margin-left: 0.5rem;
-    padding: 0;
-    line-height: normal;
-  }
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
+  .breadcrumb-spacer {
+    margin-left: 0.5rem;
+    color: var(--gray);
+  }
 }
