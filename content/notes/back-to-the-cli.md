@@ -6,10 +6,10 @@ tags:
   - cli
 ---
 
-MCP is getting pushback and honestly, good. Garry Tan and Morgan Linton both posted about ditching it in favor of going back to plain CLI. The argument: we overengineered the interface between humans and AI tools.
+Perplexity's cofounder and CTO is moving the company away from MCPs internally, back to APIs and CLIs. Morgan Linton flagged that one. Meanwhile Garry Tan went on a rant about MCP eating too much context window, bad auth, and having to toggle servers on and off. He got so fed up with Claude's MCP-based browser automation that he vibe coded a Playwright CLI wrapper in 30 minutes, 100 lines of code. Worked way better than the MCP version. Turns out Vercel had already built the same thing.
 
-Hard to disagree. MCP tried to be the universal protocol for tool calls, but the command line already was that. Pipes, stdout, exit codes. Works fine. Has been working for decades. You don't need a protocol spec and an SDK to call a tool when stdin and stdout exist.
+The pattern here is obvious. MCP adds overhead that plain CLIs just don't have. A CLI is a binary with stdin and stdout. No protocol spec, no SDK, no auth dance, no context window tax. It just works, and it's been working for decades.
 
-Feels like we built a cathedral when a shed would do. Give me a binary that takes input and returns output. That's the whole protocol.
+We built a cathedral when a shed would do.
 
 Source: [Morgan Linton on X](https://x.com/morganlinton/status/2031795683897077965) · [Garry Tan on X](https://x.com/garrytan/status/2031910564344262988)
