@@ -2,4 +2,4 @@
 title: Notes
 ---
 
-Quick notes, summaries, and ideas. Work in progress by nature.
+Fact-based notes that form a knowledge graph. Structured points, not essays.
