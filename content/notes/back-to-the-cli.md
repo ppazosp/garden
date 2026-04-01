@@ -12,4 +12,8 @@ The pattern here is obvious. MCP adds overhead that plain CLIs just don't have. 
 
 We built a cathedral when a shed would do.
 
-Source: [Morgan Linton on X](https://x.com/morganlinton/status/2031795683897077965) · [Garry Tan on X](https://x.com/garrytan/status/2031910564344262988)
+Nick Schrock (GraphQL cocreator) has a cooler take though: CLIs win for devs working in local coding agents, MCPs win for enterprise stuff integrating with Slack and web chat UIs. Different tools for different contexts. And neither is probably where we end up in a few years anyway.
+
+That last part is what sticks with me. We're arguing over plumbing while the whole house is still being designed.
+
+Source: [Morgan Linton on X](https://x.com/morganlinton/status/2031795683897077965) · [Garry Tan on X](https://x.com/garrytan/status/2031910564344262988) · Nick Schrock on X
