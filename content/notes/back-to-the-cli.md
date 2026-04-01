@@ -44,4 +44,4 @@ CLIs win for devs working in local coding agents. MCPs win for enterprise stuff 
 
 And neither is probably where we end up in a few years anyway. We're arguing over plumbing while the whole house is still being designed.
 
-Source: [Morgan Linton on X](https://x.com/morganlinton/status/2031795683897077965) · [Garry Tan on X](https://x.com/garrytan/status/2031910564344262988) · Nick Schrock on X
+Source: [Nick Schrock on X](https://x.com/schrockn/status/2037566461661642997) · [Garry Tan on X](https://x.com/garrytan/status/2031910564344262988) · [Morgan Linton on X](https://x.com/morganlinton/status/2031795683897077965)
