@@ -30,8 +30,10 @@ Write a polished post for the digital garden, meant to be shared on LinkedIn/X.
    - Verify all wikilinks resolve
    - Ensure frontmatter has title, date, description, and tags
 6. Save to `content/posts/<kebab-case-name>.md`
-7. Build: `npx quartz build` from `/Users/ppazosp/projects/garden`
-8. Commit: `feat[content]: add post on <topic>`
+7. Start the dev server in the background: `npx quartz build --serve` from `/Users/ppazosp/projects/garden` — give the user the link `http://localhost:8080` so they can preview
+8. Show the user the direct link to their post: `http://localhost:8080/posts/<kebab-case-name>`
+9. Wait for user approval before continuing
+10. Commit: `feat[content]: add post on <topic>`
 
 ## Post Format
 

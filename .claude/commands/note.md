@@ -21,8 +21,10 @@ Create a quick note for the digital garden.
 5. Add relevant tags
 6. Run the `humanizer` skill on the content before saving
 7. Save to `content/notes/<kebab-case-name>.md`
-8. Build: `npx quartz build` from `/Users/ppazosp/projects/garden`
-9. Commit: `feat[content]: add note on <topic>`
+8. Start the dev server in the background: `npx quartz build --serve` from `/Users/ppazosp/projects/garden` — give the user the link `http://localhost:8080` so they can preview
+9. Show the user the direct link to their note: `http://localhost:8080/notes/<kebab-case-name>`
+10. Wait for user approval before continuing
+11. Commit: `feat[content]: add note on <topic>`
 
 ## Note Format
 
