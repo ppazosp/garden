@@ -8,7 +8,7 @@ Finishing my CS degree at USC this July. I also co-founded [OSIX Tech](https://o
 
 I like fixing things more than building them from scratch, if I'm honest. Give me a broken system and I'm happy. AI agents, infra, automation, open source, whatever. If it's broken or could be better, I want to look at it.
 
-This garden is where I keep notes on things I read and ideas I'm working through. Some of it is half-baked. The [[posts/index|posts]] are the ones where I tried harder.
+This garden is where I write about things I'm working through.
 
 ## Find me
 

@@ -4,7 +4,7 @@
 
 Delimited by `---` (YAML). Required fields depend on content type.
 
-### Posts (content/posts/)
+### Posts (content/)
 
 ```yaml
 ---
@@ -16,19 +16,6 @@ tags:
   - tag2
 ---
 ```
-
-### Notes (content/notes/)
-
-```yaml
----
-title: Note Title
-tags:
-  - tag1
-  - tag2
----
-```
-
-Notes don't require `date` or `description`. Keep frontmatter minimal.
 
 ### All Supported Fields
 
@@ -129,12 +116,7 @@ graph TD
 content/
 ├── index.md          # Home
 ├── about.md          # About
-├── notes/            # Quick notes (flat, no subfolders)
-│   ├── index.md
-│   └── *.md
-└── posts/            # Polished articles
-    ├── index.md
-    └── *.md
+└── *.md              # Posts (flat, no subfolders)
 ```
 
 ## File Naming

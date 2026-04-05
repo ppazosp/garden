@@ -16,14 +16,10 @@ title: Home
 
 I'm Pablo. CS student at USC, CTO at [OSIX Tech](https://osix.tech).
 
-I collect stuff here. Sometimes it's a quick note on a post I saw on X, sometimes it's something I actually sat down and wrote. The notes are rough. The [[posts/index|posts]] less so.
-
-Mostly AI agents, automation, and whatever I'm trying to figure out at the time.
+I write about AI agents, automation, and whatever I'm trying to figure out at the time.
 
 ## Explore
 
-- [[notes/index|Notes]] — quick takes and summaries
-- [[posts/index|Posts]] — the finished ones
 - [[about|About me]]
 
 ## Find me

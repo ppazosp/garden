@@ -7,17 +7,9 @@ description: This skill should be used when writing content for the Quartz digit
 
 Write content for the Quartz digital garden at `garden.ppazosp.dev`. The garden repo lives at `/Users/ppazosp/projects/garden`.
 
-## Content Types
+## Content
 
-### Notes (`content/notes/`)
-
-Quick takes — summaries of posts from X/LinkedIn, ideas, concepts. Informal, short, useful.
-
-Frontmatter: `title` and `tags` required. No `date` or `description` needed.
-
-### Posts (`content/posts/`)
-
-Polished articles meant to be shared on LinkedIn/X. Longer, structured, with clear takeaways.
+Posts live directly in `content/`. Polished articles meant to be shared on LinkedIn/X. Structured, with clear takeaways.
 
 Frontmatter: `title`, `date`, `description`, and `tags` all required. The `description` is used for Open Graph previews on social media.
 
@@ -35,7 +27,7 @@ Frontmatter: `title`, `date`, `description`, and `tags` all required. The `descr
 
 - **Tone**: Informal, direct, useful. No fluff. Write like explaining to a friend.
 - **Language**: English
-- **Wikilinks**: Use shortest path (`[[mcp]]` not `[[notes/mcp]]`) when filename is unique. Add display text when the filename isn't clear: `[[mcp|Model Context Protocol]]`.
+- **Wikilinks**: Use shortest path (`[[mcp]]`) when filename is unique. Add display text when the filename isn't clear: `[[mcp|Model Context Protocol]]`.
 - **Tags**: Use lowercase kebab-case. Common tags: `agents`, `llms`, `tools`, `prompting`, `automation`, `startups`, `open-source`.
 - **Callouts**: Use sparingly. No icons are shown. Keep them for genuinely important tips or warnings.
 - **Code blocks**: Include when showing examples, commands, or config. Use appropriate language identifier.
@@ -45,7 +37,7 @@ Frontmatter: `title`, `date`, `description`, and `tags` all required. The `descr
 ## Before Saving
 
 1. Run the `humanizer` skill on all written content
-2. Verify wikilinks point to existing notes (check `content/notes/` and `content/posts/`)
+2. Verify wikilinks point to existing content (check `content/`)
 3. Ensure frontmatter is correct for the content type
 4. Build: `npx quartz build` from `/Users/ppazosp/projects/garden`
 
