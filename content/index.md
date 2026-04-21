@@ -14,6 +14,6 @@ title: Home
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
-I'm Pablo, an Applied AI Engineer. I write about AI agents, automation, and whatever I'm trying to figure out at the time.
+I'm Pazos, an Applied AI Engineer. I write about AI agents, automation, and whatever I'm trying to figure out at the time.
 
 [[about|More about me →]]
