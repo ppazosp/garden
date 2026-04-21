@@ -14,16 +14,6 @@ title: Home
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
-I'm Pablo. CS student at USC, CTO at [OSIX Tech](https://osix.tech).
+I'm Pablo, an Applied AI Engineer. I write about AI agents, automation, and whatever I'm trying to figure out at the time.
 
-I write about AI agents, automation, and whatever I'm trying to figure out at the time.
-
-## Explore
-
-- [[about|About me]]
-
-## Find me
-
-- [LinkedIn](https://www.linkedin.com/in/pablo-pazos-parada)
-- [X](https://x.com/ppazosp)
-- [GitHub](https://github.com/ppazosp)
+[[about|More about me →]]
