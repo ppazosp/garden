@@ -54,3 +54,9 @@ article p {
   text-align: justify;
   hyphens: auto;
 }
+
+// iOS Safari defaults interactive elements to system blue,
+// which propagates to currentColor SVG icons.
+svg {
+  color: var(--darkgray);
+}
