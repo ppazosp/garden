@@ -15,4 +15,4 @@ This garden is where I write about things I'm working through.
 - [LinkedIn](https://www.linkedin.com/in/pablo-pazos-parada)
 - [X](https://x.com/ppazosp)
 - [GitHub](https://github.com/ppazosp)
-- [OSIX Tech](https://osix.tech)
+- [Email](mailto:pablopazosp3@gmail.com)
