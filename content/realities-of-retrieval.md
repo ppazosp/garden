@@ -41,7 +41,7 @@ So what do we do? If we're searching for "11", why bother with semantic signific
 
 My RAG was agentic from the start. The agent could search on demand whenever he needed more info. So I let him pick: semantic or textual.
 
-In textual retrieval (BM25 in most production setups), chunks get ranked by query term matches. BM25 has saturation built in, so a chunk doesn't win by spamming the keyword. But BM25 doesn't understand context either. A chunk that says "11" a few times in passing can still outrank the chunk that actually explains 11. Take "As said on article 11, this is false, and even though article 11 left a window to the doubt, it's completely false". That chunk wins on "11" presence, even though it never explains anything.
+In textual retrieval (BM25 in most production setups), chunks get ranked by query term frequency, weighted by how rare the term is across the corpus, and normalized by chunk length. Saturation is built in, so each additional mention helps a little less than the last. But BM25 still rewards term frequency, and length normalization punishes longer chunks. A short chunk that name-drops "11" can outrank a long chunk that actually explains it. Take "As said on article 11, this is false, and even though article 11 left a window to the doubt, it's completely false". That chunk wins on "11" frequency in a short span, even though it never answers anything. To BM25, mentioning is the same as explaining.
 
 What we needed was a way to find chunks where "11" actually appears AND the surrounding text explains it. How do you combine those?
 
