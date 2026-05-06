@@ -1,6 +1,6 @@
 ---
 title: Realities of retrieval
-date: 2026-04-22
+date: 2026-05-03
 description: Everything I learned about retrieval started with one bad query.
 tags:
   - realities
