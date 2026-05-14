@@ -41,13 +41,21 @@
 }
 
 @keyframes circle-expand {
-  from { clip-path: circle(0% at var(--x, 50%) var(--y, 50%)); }
-  to   { clip-path: circle(var(--end-radius, 100%) at var(--x, 50%) var(--y, 50%)); }
+  from {
+    clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
+  }
+  to {
+    clip-path: circle(var(--end-radius, 100%) at var(--x, 50%) var(--y, 50%));
+  }
 }
 
 @keyframes circle-minimize {
-  from { clip-path: circle(var(--end-radius, 100%) at var(--x, 50%) var(--y, 50%)); }
-  to   { clip-path: circle(0% at var(--x, 50%) var(--y, 50%)); }
+  from {
+    clip-path: circle(var(--end-radius, 100%) at var(--x, 50%) var(--y, 50%));
+  }
+  to {
+    clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
+  }
 }
 
 article p {
