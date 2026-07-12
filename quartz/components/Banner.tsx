@@ -8,7 +8,7 @@ interface BannerOptions {
 }
 
 const defaultOptions: BannerOptions = {
-  defaultBanner: "/static/adam.jpg",
+  defaultBanner: "/static/library.webp",
 }
 
 export default ((userOpts?: Partial<BannerOptions>) => {
