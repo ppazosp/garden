@@ -5,7 +5,7 @@ description: Personal blog of Pablo Pazos — thoughts on agents, retrieval, aut
 
 I'm Pablo Pazos Parada, an Applied AI Engineer. This is my personal blog: a place for thoughts, notes, and the occasional project.
 
-I like the 0→1 part: diagnose the bottleneck, scope the solution with the people who actually feel it, build the thing, ship it, keep it alive. This garden is my notebook.
+I like the 0→1 part: get curious about something, understand it well enough to build with it, build the thing, ship it. This garden is my notebook along the way.
 
 ## Projects
 
