@@ -4,7 +4,7 @@ title: About
 
 I'm Pablo Pazos Parada, an Applied AI Engineer from O Grove, Spain, currently based around Santiago de Compostela. Spanish is my native language and I work comfortably in English at a C1 level.
 
-I'm finishing Computer Engineering at USC in 2026. In June 2025, I co-founded [OSIX Tech](https://osix.tech) with six classmates. I'm the CTO there, which in practice means I lead engineering, scope directly with clients, architect systems, build a lot of the AI core myself, and keep production systems running after the exciting part is over.
+I'm finishing Computer Engineering at USC in 2026. In June 2025, I co-founded [OSIX Tech](https://osix.tech) with six classmates and served as CTO: leading engineering, scoping directly with clients, architecting systems, building a lot of the AI core myself, and keeping production systems running after the exciting part was over. I've since moved on.
 
 Most companies barely use AI beyond chatbots. The interesting work is turning AI into operational systems: agents with tools, retrieval that can be trusted, integrations with messy business data, dashboards that expose what the system is doing, and deployment paths that don't collapse after the demo.
 
@@ -15,18 +15,11 @@ I'm here for the 0→1. Building what didn't exist yesterday, finding edges nobo
 ### OSIX Tech
 
 **CTO & Co-Founder**  
-June 2025 – Present · Santiago de Compostela
+June 2025 – 2026 · Santiago de Compostela
 
 Built 5+ production AI systems end-to-end, from client scoping to architecture to deployment and maintenance. Led a seven-person engineering team while working directly with enterprise clients as the forward deployed engineer translating business needs into shipped products.
 
 I have led technical consulting engagements across manufacturing, chemical, and professional services industries: diagnosing operational pain points, scoping AI agent solutions, presenting proposals to technical and executive stakeholders, and owning delivery from pilot through production.
-
-Selected work:
-
-- [[Projects/OSIX Tech/APEC|APEC]]
-- [[Projects/OSIX Tech/IRIS|IRIS]]
-- [[Projects/OSIX Tech/ACTA|ACTA]]
-- [[Projects/OSIX Tech/Nessie|Nessie]]
 
 ### Freelance
 
@@ -42,7 +35,7 @@ Spotted a real-world operations problem, designed the solution, built it solo, s
 
 Computer Engineering degree covering algorithms, systems architecture, software engineering, and CS fundamentals.
 
-## Independent Work
+## Projects
 
 - [[Projects/Agrex|Agrex]]
 - [[Projects/Backpack|Backpack]]
