@@ -9,7 +9,6 @@ tags:
   - rag
   - retrieval
   - embeddings
-draft: true
 ---
 
 My first RAG felt like finding a hidden treasure. Then I asked it a simple question and it returned every wrong answer in the corpus. That one failure taught me everything I now know about retrieval.
