@@ -1,12 +1,15 @@
 ---
 title: Realities of retrieval
-date: 2026-05-03
+created: 2026-07-12
+modified: 2026-07-13
+published: 2026-07-12
 description: Everything I learned about retrieval started with one bad query.
 tags:
   - realities
   - rag
   - retrieval
   - embeddings
+draft: true
 ---
 
 My first RAG felt like finding a hidden treasure. Then I asked it a simple question and it returned every wrong answer in the corpus. That one failure taught me everything I now know about retrieval.
