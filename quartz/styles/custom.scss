@@ -68,3 +68,22 @@ article p {
 svg {
   color: var(--darkgray);
 }
+
+// ASCII diagrams: centre the art block within the code box while keeping the
+// art itself left-aligned internally, so the box drawing stays square.
+.ascii-diagram {
+  // without this the wrapper sizes to the art's intrinsic width and pushes
+  // the whole page sideways on narrow screens
+  min-width: 0;
+  max-width: 100%;
+
+  pre {
+    text-align: center;
+
+    & > code {
+      display: inline-block;
+      text-align: left;
+      min-width: 0;
+    }
+  }
+}
