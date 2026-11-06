@@ -6,10 +6,12 @@ import * as Component from "./quartz/components"
 import * as Plugin from "./.quartz/plugins"
 import { TableOfContentsTransformer } from "@quartz-community/table-of-contents"
 import Banner from "./components/Banner"
+import { BannerImages } from "./components/BannerImages"
 import Breadcrumbs from "./components/Breadcrumbs"
 import Darkmode from "./components/Darkmode"
 import Explorer from "./components/Explorer"
 import Footer from "./components/Footer"
+import { FontPreload } from "./components/FontPreload"
 import Graph from "./components/Graph"
 import ReaderMode from "./components/ReaderMode"
 import Search from "./components/Search"
@@ -94,6 +96,8 @@ const config = await loadQuartzConfig(undefined, layoutOverrides)
 const gfm = config.plugins.transformers.findIndex((t) => t.name === "GitHubFlavoredMarkdown")
 if (gfm === -1) throw new Error("quartz.ts: GitHubFlavoredMarkdown transformer not found")
 config.plugins.transformers.splice(gfm + 1, 0, TableOfContentsTransformer())
+
+config.plugins.emitters.push(BannerImages(), FontPreload())
 
 // Quartz 5 hands generated pages (tag listings) to ContentIndex too, dated "now", so they
 // crowded posts out of the RSS feed and showed up in search. Index real notes only, as in v4.

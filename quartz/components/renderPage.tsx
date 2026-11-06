@@ -51,11 +51,13 @@ export function pageResources(
   }
 
   const extracted = ctx?.extractedInlineResources
-  const resolvedCss: CSSResource[] = staticResources.css.map((resource) => {
-    if (!(resource.inline ?? false) || !extracted) return resource
+  const resolvedCss: CSSResource[] = staticResources.css.flatMap((resource) => {
+    if (!(resource.inline ?? false) || !extracted) return [resource]
     const filename = extracted.get(resource.content)
-    if (!filename) return resource
-    return { content: joinSegments(baseDir, filename) }
+    // "" = bundled into index.css (garden patch in ComponentResources)
+    if (filename === "") return []
+    if (!filename) return [resource]
+    return [{ content: joinSegments(baseDir, filename) }]
   })
 
   const resolvedJs: JSResource[] = staticResources.js.map((resource) => {
