@@ -1,0 +1,130 @@
+# yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
+configuration:
+  pageTitle: ppazosp
+  pageTitleSuffix: " | garden.ppazosp.dev"
+  enableSPA: true
+  enablePopovers: true
+  analytics: null
+  locale: en-US
+  baseUrl: garden.ppazosp.dev
+  ignorePatterns:
+    - private
+    - templates
+    - .obsidian
+  theme:
+    # Satoshi is self-hosted from quartz/static/fonts via custom.scss
+    fontOrigin: local
+    cdnCaching: false
+    typography:
+      # full stacks, matching Quartz 4's fallbacks while Satoshi loads
+      header: '"Satoshi", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+      body: '"Satoshi", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+      code: '"JetBrains Mono", ui-monospace, SFMono-Regular, SF Mono, Menlo, monospace'
+    colors:
+      lightMode:
+        light: "#f5f2eb"
+        lightgray: "#e8e4dc"
+        gray: "#9a9a9a"
+        darkgray: "#4a4a4a"
+        dark: "#2c2c2c"
+        secondary: "#5a5a5a"
+        tertiary: "#7a7a7a"
+        highlight: rgba(0, 0, 0, 0.05)
+        textHighlight: "#f0e6c880"
+      darkMode:
+        light: "#1a1a1a"
+        lightgray: "#2e2e2e"
+        gray: "#7a7a7a"
+        darkgray: "#c8c8c8"
+        dark: "#e0e0e0"
+        secondary: "#a0a0a0"
+        tertiary: "#8a8a8a"
+        highlight: rgba(255, 255, 255, 0.05)
+        textHighlight: "#3a3a3a80"
+plugins:
+  - source: "@quartz-community/note-properties"
+    enabled: true
+    options:
+      hidePropertiesView: true
+    order: 5
+  - source: "@quartz-community/created-modified-date"
+    enabled: true
+    options:
+      defaultDateType: published
+      priority:
+        - frontmatter
+        - git
+        - filesystem
+    order: 10
+  - source: "@quartz-community/syntax-highlighting"
+    enabled: true
+    options:
+      theme:
+        light: github-light
+        dark: github-dark
+      keepBackground: false
+    order: 20
+  - source: "@quartz-community/obsidian-flavored-markdown"
+    enabled: true
+    options:
+      enableInHtmlEmbed: false
+    order: 30
+  - source: "@quartz-community/github-flavored-markdown"
+    enabled: true
+    order: 40
+  # table-of-contents: its transformer is added in quartz.ts (see there for why)
+  - source: "@quartz-community/crawl-links"
+    enabled: true
+    options:
+      markdownLinkResolution: shortest
+    order: 60
+  - source: "@quartz-community/description"
+    enabled: true
+    order: 70
+  - source: "@quartz-community/latex"
+    enabled: true
+    options:
+      renderEngine: katex
+    order: 80
+  - source: "@quartz-community/quartz-fonts"
+    enabled: true
+    options:
+      fontOrigin: local
+      # full stacks, matching Quartz 4's fallbacks while Satoshi loads
+      header: '"Satoshi", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+      body: '"Satoshi", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+      code: '"JetBrains Mono", ui-monospace, SFMono-Regular, SF Mono, Menlo, monospace'
+  - source: "@quartz-community/remove-draft"
+    enabled: true
+  - source: "@quartz-community/alias-redirects"
+    enabled: true
+  - source: "@quartz-community/content-index"
+    enabled: true
+    options:
+      enableSiteMap: true
+      enableRSS: true
+  - source: "@quartz-community/favicon"
+    enabled: true
+  - source: "@quartz-community/content-page"
+    enabled: true
+  - source: "@quartz-community/folder-page"
+    enabled: true
+  - source: "@quartz-community/tag-page"
+    enabled: true
+    options:
+      prefixTags: true
+  - source: "@quartz-community/backlinks"
+    enabled: true
+  - source: "@quartz-community/article-title"
+    enabled: true
+  - source: "@quartz-community/content-meta"
+    enabled: true
+  - source: "@quartz-community/tag-list"
+    enabled: true
+  - source: "@quartz-community/page-title"
+    enabled: true
+  - source: "@quartz-community/spacer"
+    enabled: true
+  - source: "@quartz-community/recent-notes"
+    enabled: true
+# Page layout is defined in quartz.ts.

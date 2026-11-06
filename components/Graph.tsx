@@ -1,0 +1,107 @@
+// Forked from @quartz-community/graph 1.0.0: line icon for the global graph button.
+import type {
+  QuartzComponent,
+  QuartzComponentConstructor,
+  QuartzComponentProps,
+} from "@quartz-community/types"
+import { classNames } from "@quartz-community/utils"
+import style from "./styles/graph.scss"
+// @ts-expect-error - inline script imported as string by esbuild loader
+import script from "./scripts/graph.inline.ts"
+
+export interface D3Config {
+  drag: boolean
+  zoom: boolean
+  depth: number
+  scale: number
+  repelForce: number
+  centerForce: number
+  linkDistance: number
+  fontSize: number
+  opacityScale: number
+  removeTags: string[]
+  showTags: boolean
+  focusOnHover?: boolean
+  enableRadial?: boolean
+}
+
+export interface GraphOptions {
+  localGraph?: Partial<D3Config>
+  globalGraph?: Partial<D3Config>
+}
+
+const defaultOptions: GraphOptions = {
+  localGraph: {
+    drag: true,
+    zoom: true,
+    depth: 1,
+    scale: 1.1,
+    repelForce: 0.5,
+    centerForce: 0.3,
+    linkDistance: 30,
+    fontSize: 0.6,
+    opacityScale: 1,
+    showTags: true,
+    removeTags: [],
+    focusOnHover: false,
+    enableRadial: false,
+  },
+  globalGraph: {
+    drag: true,
+    zoom: true,
+    depth: -1,
+    scale: 0.9,
+    repelForce: 0.5,
+    centerForce: 0.2,
+    linkDistance: 30,
+    fontSize: 0.6,
+    opacityScale: 1,
+    showTags: true,
+    removeTags: [],
+    focusOnHover: true,
+    enableRadial: true,
+  },
+}
+
+export default ((userOpts?: Partial<GraphOptions>) => {
+  const Graph: QuartzComponent = ({ displayClass }: QuartzComponentProps) => {
+    const localGraph = { ...defaultOptions.localGraph, ...userOpts?.localGraph }
+    const globalGraph = { ...defaultOptions.globalGraph, ...userOpts?.globalGraph }
+
+    return (
+      <div class={classNames(displayClass, "graph")}>
+        <h3>Graph View</h3>
+        <div class="graph-outer">
+          <div class="graph-container" data-cfg={JSON.stringify(localGraph)}></div>
+          <button class="global-graph-icon" aria-label="Global Graph">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M9 5C9 6.65685 7.65685 8 6 8C4.34315 8 3 6.65685 3 5C3 3.34315 4.34315 2 6 2C7.65685 2 9 3.34315 9 5Z" />
+              <path d="M21 14C21 15.6569 19.6569 17 18 17C16.3431 17 15 15.6569 15 14C15 12.3431 16.3431 11 18 11C19.6569 11 21 12.3431 21 14Z" />
+              <path d="M9 19C9 20.6569 7.65685 22 6 22C4.34315 22 3 20.6569 3 19C3 17.3431 4.34315 16 6 16C7.65685 16 9 17.3431 9 19Z" />
+              <path d="M6 8V16" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M15 14H12C8.68629 14 6 11.3137 6 8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="global-graph-outer">
+          <div class="global-graph-container" data-cfg={JSON.stringify(globalGraph)}></div>
+        </div>
+      </div>
+    )
+  }
+
+  Graph.css = style
+  Graph.afterDOMLoaded = script
+
+  return Graph
+}) satisfies QuartzComponentConstructor

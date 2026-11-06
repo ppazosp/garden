@@ -1,4 +1,4 @@
-@use "./base.scss";
+@use "./variables.scss" as *;
 
 @font-face {
   font-family: "Satoshi";
@@ -59,9 +59,12 @@
 }
 
 // iOS Safari defaults interactive elements to system blue,
-// which propagates to currentColor SVG icons.
-svg {
-  color: var(--darkgray);
+// which propagates to currentColor SVG icons. Kept in Quartz's base layer so
+// component icon colours (e.g. the breadcrumb chevron) still take precedence.
+@layer quartz-base {
+  svg {
+    color: var(--darkgray);
+  }
 }
 
 // ASCII diagrams: centre the art block within the code box while keeping the

@@ -1,6 +1,10 @@
 {
   "cleanUrls": true,
-  "buildCommand": "npx quartz build",
+  "buildCommand": "npm run install-plugins && npx quartz build",
   "outputDirectory": "public",
-  "installCommand": "npm ci"
+  "installCommand": "npm ci",
+  "redirects": [
+    { "source": "/Projects", "destination": "/", "permanent": true },
+    { "source": "/Projects/Agrex", "destination": "/agrex", "permanent": true }
+  ]
 }
