@@ -81,8 +81,9 @@ plugins:
   - source: "@quartz-community/description"
     enabled: true
     order: 70
+  # No post uses math; enabling this adds KaTeX's CSS and script (from a CDN) to every page.
   - source: "@quartz-community/latex"
-    enabled: true
+    enabled: false
     options:
       renderEngine: katex
     order: 80
