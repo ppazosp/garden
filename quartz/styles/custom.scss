@@ -85,3 +85,13 @@
     }
   }
 }
+
+// favicon before external links (see components/LinkFavicons.ts)
+a.external > .link-favicon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin: 0 0.3em 0 0.05em;
+  vertical-align: -0.12em;
+  border-radius: 2px;
+}

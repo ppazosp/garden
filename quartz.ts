@@ -13,6 +13,7 @@ import Explorer from "./components/Explorer"
 import Footer from "./components/Footer"
 import { FontPreload } from "./components/FontPreload"
 import Graph from "./components/Graph"
+import { LinkFaviconImages, LinkFavicons } from "./components/LinkFavicons"
 import ReaderMode from "./components/ReaderMode"
 import Search from "./components/Search"
 import TableOfContents from "./components/TableOfContents"
@@ -59,7 +60,8 @@ const content: Partial<FullPageLayout> = {
       component: Plugin.RecentNotes({
         title: "Recent posts",
         limit: 5,
-        filter: (f: { slug?: string }) => f.slug !== "index" && f.slug !== "agrex",
+        // project pages stay out of the post list
+        filter: (f: { slug?: string }) => !["index", "agrex", "gitisle"].includes(f.slug ?? ""),
       }),
       condition: (page) => page.fileData.slug === "index",
     }),
@@ -97,7 +99,12 @@ const gfm = config.plugins.transformers.findIndex((t) => t.name === "GitHubFlavo
 if (gfm === -1) throw new Error("quartz.ts: GitHubFlavoredMarkdown transformer not found")
 config.plugins.transformers.splice(gfm + 1, 0, TableOfContentsTransformer())
 
-config.plugins.emitters.push(BannerImages(), FontPreload())
+// Favicons go on links once crawl-links has marked which ones are external.
+const crawlLinks = config.plugins.transformers.findIndex((t) => t.name === "LinkProcessing")
+if (crawlLinks === -1) throw new Error("quartz.ts: LinkProcessing transformer not found")
+config.plugins.transformers.splice(crawlLinks + 1, 0, LinkFavicons())
+
+config.plugins.emitters.push(BannerImages(), FontPreload(), LinkFaviconImages())
 
 // Quartz 5 hands generated pages (tag listings) to ContentIndex too, dated "now", so they
 // crowded posts out of the RSS feed and showed up in search. Index real notes only, as in v4.
