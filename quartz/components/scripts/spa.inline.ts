@@ -62,18 +62,18 @@ function stopLoading() {
   }
 }
 
-// garden: turn the page like a book while the DOM swaps. Following a link turns the page
-// over from the right, going back turns it from the left. Styles are in custom.scss.
-async function pageTurn(isBack: boolean, swap: () => void) {
+// garden: crossfade quickly while the DOM swaps, instead of a hard cut. Styles are in
+// custom.scss.
+async function navTransition(swap: () => void) {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   if (!document.startViewTransition || reduceMotion) {
     swap()
     return
   }
   const root = document.documentElement
-  root.dataset.pageTurn = isBack ? "back" : "forward"
+  root.dataset.nav = ""
   const transition = document.startViewTransition(swap)
-  transition.finished.finally(() => delete root.dataset.pageTurn)
+  transition.finished.finally(() => delete root.dataset.nav)
   await transition.updateCallbackDone
 }
 
@@ -123,7 +123,7 @@ async function _navigate(url: URL, isBack: boolean = false) {
   html.body.appendChild(announcer)
 
   document.querySelector(".navigation-progress")?.remove()
-  await pageTurn(isBack, () => {
+  await navTransition(() => {
     micromorph(document.body, html.body)
 
     // scroll into place and add history
