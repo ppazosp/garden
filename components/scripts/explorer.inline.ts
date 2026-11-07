@@ -229,6 +229,17 @@ function renderTree(node, container, currentSlug, folderBehavior, savedState, pa
   }
 }
 
+// Whether two rendered lists are the same tree, ignoring which link is the current page.
+function sameTree(a, b) {
+  if (a.length !== b.length) return false
+  const markup = (li) => {
+    const clone = li.cloneNode(true)
+    clone.querySelectorAll("a").forEach((link) => link.classList.remove("active", "is-active"))
+    return clone.outerHTML
+  }
+  return a.every((li, i) => markup(li) === markup(b[i]))
+}
+
 async function handleNavOrRender(e) {
   const thisGeneration = ++currentRenderGeneration
   try {
@@ -265,15 +276,27 @@ async function handleNavOrRender(e) {
       // Check if another nav event started while we were fetching
       if (thisGeneration === currentRenderGeneration) {
         if (trie && trie.children && trie.children.length > 0) {
-          // Clear again before rendering to ensure clean state
-          explorerUl.innerHTML = '<li class="overflow-end"></li>'
-
-          // keep the overflow sentinel last so the list starts flush with the header
           const fragment = document.createDocumentFragment()
           for (const child of trie.children) {
             renderTree(child, fragment, currentSlug, folderBehavior, savedState, "")
           }
-          explorerUl.insertBefore(fragment, explorerUl.querySelector(".overflow-end"))
+
+          const current = [...explorerUl.children].filter((li) => !li.matches(".overflow-end"))
+          if (sameTree(current, [...fragment.children])) {
+            // Same tree as the page we came from: only move the highlight, so it transitions
+            // instead of the whole list being replaced at once.
+            const oldLinks = explorerUl.querySelectorAll("a")
+            const newLinks = fragment.querySelectorAll("a")
+            oldLinks.forEach((link, i) => {
+              const active = newLinks[i].classList.contains("active")
+              link.classList.toggle("active", active)
+              link.classList.toggle("is-active", active)
+            })
+          } else {
+            // keep the overflow sentinel last so the list starts flush with the header
+            explorerUl.innerHTML = '<li class="overflow-end"></li>'
+            explorerUl.insertBefore(fragment, explorerUl.querySelector(".overflow-end"))
+          }
         } else {
           console.warn("[Explorer] No trie or empty children")
         }
