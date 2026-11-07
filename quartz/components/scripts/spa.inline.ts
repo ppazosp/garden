@@ -122,6 +122,13 @@ async function _navigate(url: URL, isBack: boolean = false) {
   announcer.dataset.persist = ""
   html.body.appendChild(announcer)
 
+  // garden: the explorer list is built client-side, so the fetched page has it empty. Carry the
+  // current list over; otherwise the crossfade shows the menu vanishing and coming back.
+  const oldLists = document.querySelectorAll(".explorer-ul")
+  html.querySelectorAll(".explorer-ul").forEach((ul, i) => {
+    if (oldLists[i]) ul.replaceChildren(...[...oldLists[i].childNodes].map((n) => n.cloneNode(true)))
+  })
+
   document.querySelector(".navigation-progress")?.remove()
   await navTransition(() => {
     micromorph(document.body, html.body)

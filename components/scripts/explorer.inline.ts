@@ -252,8 +252,8 @@ async function handleNavOrRender(e) {
         continue
       }
 
-      // Clear existing content
-      explorerUl.innerHTML = '<li class="overflow-end"></li>'
+      // The list carried over from the previous page stays up until the new one is built, so
+      // the explorer never flashes empty while navigating.
 
       // Get data functions configuration
       const dataFns = explorer.dataset.dataFns
