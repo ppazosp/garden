@@ -227,7 +227,7 @@ function renderTree(node, container, currentSlug, folderBehavior, savedState, pa
       link.href = resolveBasePath(node.data.slug)
       const name = node.displayName || node.slugSegment
       if (node.data.date) {
-        // garden: posts show their date on the right
+        // garden: posts and projects show their date on the right
         const title = document.createElement("span")
         title.className = "explorer-title"
         title.textContent = name
@@ -247,15 +247,14 @@ function renderTree(node, container, currentSlug, folderBehavior, savedState, pa
   }
 }
 
-// "2026-08-17" -> "Aug 17", with the year added for posts from other years
+// "2026-08-17" -> "Aug 17, 2026", the same format as the dates on the pages
 function formatPostDate(ymd) {
   const [year, month, day] = ymd.split("-").map(Number)
-  const date = new Date(Date.UTC(year, month - 1, day))
-  return date.toLocaleDateString("en-US", {
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString("en-US", {
     timeZone: "UTC",
+    year: "numeric",
     month: "short",
-    day: "numeric",
-    ...(year === new Date().getFullYear() ? {} : { year: "numeric" }),
+    day: "2-digit",
   })
 }
 

@@ -34,8 +34,8 @@ const explorer = Explorer({
     }
     return node
   },
-  // Projects, then Posts; posts newest first (dates come from the explorer, see postDates),
-  // anything else alphabetical. Serialised to the browser, so it can't use outer variables.
+  // Projects, then Posts; pages newest first (dates come from the explorer, see pageDates),
+  // anything without a date alphabetical. Serialised to the browser, so it can't use outer variables.
   sortFn: (a, b) => {
     if (a.isFolder && b.isFolder) {
       const order = ["projects", "posts"]
