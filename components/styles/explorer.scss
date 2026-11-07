@@ -105,6 +105,20 @@ button.desktop-explorer h2 {
   color: var(--dark);
   opacity: 0.75;
   pointer-events: all;
+  display: inline-block;
+  transition:
+    color 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+.explorer-content ul li > a:hover {
+  opacity: 1;
+  transform: translateX(3px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .explorer-content ul li > a:hover {
+    transform: none;
+  }
 }
 .explorer-content ul li > a.active {
   opacity: 1;
