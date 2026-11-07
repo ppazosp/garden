@@ -10,7 +10,7 @@ tags:
   - open-source
   - tools
 aliases:
-  - Projects/Agrex
+  - agrex
 ---
 
 Agrex is a real-time graph visualizer for AI agent execution flows. You instrument your agent, and Agrex draws the run as a live graph: agents, tools, and files as nodes, edges showing who spawned what and what got read or written.

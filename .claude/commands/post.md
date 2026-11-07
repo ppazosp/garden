@@ -18,7 +18,7 @@ Write a polished post for the digital garden, meant to be shared on LinkedIn/X.
    - What should readers walk away with?
 3. Research the topic:
    - Search the web for recent, relevant information
-   - Check existing posts in `content/` for related content to reference
+   - Check existing posts in `content/posts/` for related content to reference
    - Share findings and ask for the user's opinion
 4. Draft the post collaboratively:
    - Propose an outline first, get approval
@@ -29,7 +29,7 @@ Write a polished post for the digital garden, meant to be shared on LinkedIn/X.
    - Run the `humanizer` skill on the full post
    - Verify all wikilinks resolve
    - Ensure frontmatter has title, date, description, and tags
-6. Save to `content/<kebab-case-name>.md`
+6. Save to `content/posts/<kebab-case-name>.md`
 7. Start the dev server in the background: `npx quartz build --serve` from `/Users/ppazosp/projects/garden` — give the user the link `http://localhost:8080` so they can preview
 8. Show the user the direct link to their post: `http://localhost:8080/<kebab-case-name>`
 9. Wait for user approval before continuing

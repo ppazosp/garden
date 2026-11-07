@@ -9,6 +9,9 @@ tags:
   - infrastructure
   - state
 draft: false
+# old URL from before the posts/ and projects/ folders
+aliases:
+  - leave-no-state-behind
 ---
 
 Every step in the short history of agent infrastructure has been the same move performed again, which is putting a little more distance between the agent and the machine it was born on. We have made that move four times now, and each time it arrived looking like an operational detail rather than a change of kind. The fifth move is the one that matters, and it has not happened yet, which is not for lack of models or tooling but because a harness today drags its own state behind it like an installation.

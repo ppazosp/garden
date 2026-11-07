@@ -7,6 +7,9 @@ tags:
   - llms
   - software-engineering
   - careers
+# old URL from before the posts/ and projects/ folders
+aliases:
+  - the-first-word-was-never-important
 ---
 
 For about a year, I've been living inside coding agents. Most of what I ship day to day gets written by one of them. For most of that year the improvement felt gradual. At first they were prototyping toys, good for a demo if you babysat them long enough. Then they needed less babysitting. Then they started oneshotting the easy stuff.

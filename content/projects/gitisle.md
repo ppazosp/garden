@@ -9,6 +9,9 @@ tags:
   - tools
   - open-source
   - agents
+# old URL from before the posts/ and projects/ folders
+aliases:
+  - gitisle
 ---
 
 GitIsle is a native macOS app that turns your Mac's notch into a live view of your GitHub pull requests. It stays invisible until something happens, then shows what's merging, which checks are running, and what needs you.

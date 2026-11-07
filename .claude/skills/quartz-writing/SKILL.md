@@ -9,7 +9,7 @@ Write content for the Quartz digital garden at `garden.ppazosp.dev`. The garden 
 
 ## Content
 
-Posts live directly in `content/`. Polished articles meant to be shared on LinkedIn/X. Structured, with clear takeaways.
+Posts live in `content/posts/`. Polished articles meant to be shared on LinkedIn/X. Structured, with clear takeaways. Project pages (apps and tools Pablo built) live in `content/projects/`. The menu lists posts newest first by their `date`/`published` frontmatter.
 
 Frontmatter: `title`, `date`, `description`, and `tags` all required. The `description` is used for Open Graph previews on social media.
 
@@ -37,7 +37,7 @@ Frontmatter: `title`, `date`, `description`, and `tags` all required. The `descr
 ## Before Saving
 
 1. Run the `humanizer` skill on all written content
-2. Verify wikilinks point to existing content (check `content/`)
+2. Verify wikilinks point to existing content (check `content/posts/` and `content/projects/`)
 3. Ensure frontmatter is correct for the content type
 4. Build: `npx quartz build` from `/Users/ppazosp/projects/garden`
 

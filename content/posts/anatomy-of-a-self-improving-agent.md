@@ -10,6 +10,9 @@ tags:
   - harnesses
   - self-improvement
   - anatomies
+# old URL from before the posts/ and projects/ folders
+aliases:
+  - anatomy-of-a-self-improving-agent
 ---
 
 Some months ago, Hermes Agent exploded in virality as being an open source agent harness that could self-improve itself. Because it is open source, that self-improvement loop was there for everyone to see from day one. I just never made the time to actually look at how it worked.
@@ -49,13 +52,13 @@ The Curator has two jobs.
 
 The first job is organization. If I have 5 skills about deployments using google cloud, aws or railway, the Curator will fold them into a single deployment umbrella. The umbrella's SKILL.md is small, basically "figure out which platform first, then load references/<platform>.md". The actual deployment workflow for each platform lives in those reference files (gcp.md, aws.md, railway.md...). Only the SKILL.md loads when the umbrella activates, the reference files stay on disk until the agent explicitly opens one. Real lazy loading.
 
-![Umbrella loading tiers: catalog in the system prompt (~50t, always), SKILL.md on umbrella match (~500t), references/ files on demand (~2000t each)](images/umbrella-layout.svg)
+![Umbrella loading tiers: catalog in the system prompt (~50t, always), SKILL.md on umbrella match (~500t), references/ files on demand (~2000t each)](../images/umbrella-layout.svg)
 
 Why does this matter? The system prompt only loads the catalog (name + description per skill), not the full SKILL.md, so each one is cheap individually but they pile up with hundreds. And when I say "I want to deploy", the agent might speculatively load 2 or 3 narrow skills before figuring out which one I actually need. With one umbrella, "I want to deploy" loads only the umbrella SKILL.md, which then asks "hey where do you want to deploy?" and pulls just the right reference.
 
 The second job is lifecycle management. The first thing I asked myself when learning about Hermes was, how do you manage 100k skills accumulating after 6 months of use? The Curator handles it with a simple 3-state machine: active (recently used or created), stale (30 days without use), and archived (90 days without use). Stale is a soft state, the skill still works normally, it's just flagged for the Curator's attention. Archived is the hard state, the skill is moved into a .archive/ directory and becomes invisible to the agent, though still recoverable.
 
-![Skill lifecycle state machine: active flows to stale at 30 days idle, then archived at 90 days idle, with auto-reactivation when used](images/skill-lifecycle.svg)
+![Skill lifecycle state machine: active flows to stale at 30 days idle, then archived at 90 days idle, with auto-reactivation when used](../images/skill-lifecycle.svg)
 
 The elegant part is how the Curator actually runs both jobs. Each pass of the Curator has two phases. Phase 1 is pure Python, no LLM at all, it just walks the skills and applies the state machine based on last_activity_at. No tokens burned. Phase 2 is the LLM review pass, which sees the post-transition state and makes the higher-level calls like umbrella consolidation or patching drift (e.g., a skill that referenced a deprecated flag gets updated to the current one). They specifically didn't burn tokens on something a timestamp comparison can do, and that's part of the simplicity I love about this design.
 

@@ -3,7 +3,6 @@ title: Home
 description: Personal blog of Pablo Pazos — thoughts on agents, retrieval, automation, and the occasional project.
 aliases:
   - about
-  - Projects
 ---
 
 I'm Pazos, an engineer from Spain, currently working at [Omnia](https://useomnia.com).
@@ -14,8 +13,8 @@ I'm here for the 0→1: building what didn't exist yesterday, finding edges nobo
 
 ## Side projects
 
-- [[gitisle|GitIsle]]: your pull requests and agent usage, live in the Mac's notch.
-- [[agrex|Agrex]]: a real-time graph of what your AI agents are doing.
+- [[projects/gitisle|GitIsle]]: your pull requests and agent usage, live in the Mac's notch.
+- [[projects/agrex|Agrex]]: a real-time graph of what your AI agents are doing.
 
 ## Find me
 
