@@ -13,7 +13,6 @@ import Explorer from "./components/Explorer"
 import Footer from "./components/Footer"
 import { FontPreload } from "./components/FontPreload"
 import Graph from "./components/Graph"
-import RecentCards from "./components/RecentCards"
 import { LinkFaviconImages, LinkFavicons } from "./components/LinkFavicons"
 import ReaderMode from "./components/ReaderMode"
 import Search from "./components/Search"
@@ -43,9 +42,6 @@ const left = (withReaderMode: boolean) => [
 
 const footer = [Footer({ links: {} })]
 
-// pages that aren't posts: kept out of the recent-post cards
-const notPosts = ["index", "agrex", "gitisle"]
-
 const content: Partial<FullPageLayout> = {
   beforeBody: [
     Banner(),
@@ -53,17 +49,23 @@ const content: Partial<FullPageLayout> = {
       component: Breadcrumbs(),
       condition: (page) => page.fileData.slug !== "index",
     }),
-    Component.ConditionalRender({
-      component: RecentCards({ limit: 3, exclude: notPosts }),
-      condition: (page) => page.fileData.slug === "index",
-    }),
     Plugin.ArticleTitle(),
     Plugin.ContentMeta(),
     Plugin.TagList(),
   ],
   left: left(true),
   right: [Graph(), Component.DesktopOnly(TableOfContents()), Plugin.Backlinks()],
-  afterBody: [],
+  afterBody: [
+    Component.ConditionalRender({
+      component: Plugin.RecentNotes({
+        title: "Recent posts",
+        limit: 5,
+        // project pages stay out of the post list
+        filter: (f: { slug?: string }) => !["index", "agrex", "gitisle"].includes(f.slug ?? ""),
+      }),
+      condition: (page) => page.fileData.slug === "index",
+    }),
+  ],
   footer,
 }
 
