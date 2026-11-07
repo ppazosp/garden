@@ -3,6 +3,7 @@ title: GitIsle
 created: 2026-10-11
 modified: 2026-11-07
 published: 2026-10-11
+banner: /static/gitisle.webp
 description: A native macOS app that turns the notch into a live view of your GitHub pull requests, plus your Claude Code and Codex usage.
 tags:
   - tools
