@@ -77,13 +77,20 @@ export const LinkFavicons: QuartzTransformerPlugin = () => ({
       visit(tree, "element", (node) => {
         const classes = node.properties?.className
         const host = hostOf(node.properties?.href)
-        if (node.tagName === "a" && host && Array.isArray(classes) && classes.includes("external")) {
+        if (
+          node.tagName === "a" &&
+          host &&
+          Array.isArray(classes) &&
+          classes.includes("external")
+        ) {
           links.push([node, host])
         }
       })
 
       for (const [link, host] of links) {
         if (host === "mailto") {
+          // crawl-links opens external links in a new tab; for mail that's just an empty tab
+          delete link.properties.target
           dropArrow(link)
           link.children.unshift(envelope())
           continue

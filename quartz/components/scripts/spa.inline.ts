@@ -62,11 +62,47 @@ function stopLoading() {
   }
 }
 
+// garden: fade the old article out while the next page loads, swap, then fade the new one in.
+// Old and new text are never on screen together, and the banner only fades when the image
+// actually changes. Plain CSS transitions on .center (custom.scss), so every browser runs them
+// the same. Returns a promise that settles once the old text is gone.
+const FADE_OUT_MS = 90
+function fadeOut(): Promise<void> {
+  const center = document.querySelector(".center")
+  if (!center || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return Promise.resolve()
+  }
+  center.classList.add("nav-out")
+  return new Promise((resolve) => setTimeout(resolve, FADE_OUT_MS))
+}
+
+// Carry the faded state into the fetched page so its content arrives invisible.
+async function prepareSwap(next: Document) {
+  const center = document.querySelector(".center")
+  if (!center?.classList.contains("nav-out")) return
+  const banner = (doc: Document | Element) => doc.querySelector(".page-banner")?.getAttribute("src")
+  if (banner(center) !== banner(next)) {
+    center.classList.add("nav-banner")
+    await new Promise((resolve) => setTimeout(resolve, FADE_OUT_MS))
+  }
+  next.querySelector(".center")?.classList.add(...center.classList)
+}
+
+function fadeIn() {
+  // two frames, so the new content is painted at opacity 0 before it transitions in
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() =>
+      document.querySelector(".center")?.classList.remove("nav-out", "nav-banner"),
+    ),
+  )
+}
+
 let isNavigating = false
 let p: DOMParser
 async function _navigate(url: URL, isBack: boolean = false) {
   isNavigating = true
   startLoading()
+  const fadedOut = fadeOut()
   p = p || new DOMParser()
   const contents = await fetchCanonical(url)
     .then((res) => {
@@ -82,6 +118,7 @@ async function _navigate(url: URL, isBack: boolean = false) {
     })
 
   if (!contents) return
+  await fadedOut
 
   // notify about to nav
   const event: CustomEventMap["prenav"] = new CustomEvent("prenav", { detail: {} })
@@ -107,7 +144,23 @@ async function _navigate(url: URL, isBack: boolean = false) {
   announcer.dataset.persist = ""
   html.body.appendChild(announcer)
 
+  // garden: the fetched page has the explorer as the server renders it: list empty (it's built
+  // client-side) and not collapsed. Carry the current list and open/closed state over, or the
+  // menu blinks empty, and on narrow screens slides open and shut, on every navigation.
+  const oldExplorers = document.querySelectorAll(".explorer")
+  html.querySelectorAll(".explorer").forEach((explorer, i) => {
+    const old = oldExplorers[i]
+    if (!old) return
+    explorer.classList.toggle("collapsed", old.classList.contains("collapsed"))
+    const expanded = old.getAttribute("aria-expanded")
+    if (expanded !== null) explorer.setAttribute("aria-expanded", expanded)
+    const ul = explorer.querySelector(".explorer-ul")
+    const oldUl = old.querySelector(".explorer-ul")
+    if (ul && oldUl) ul.replaceChildren(...[...oldUl.childNodes].map((n) => n.cloneNode(true)))
+  })
+
   document.querySelector(".navigation-progress")?.remove()
+  await prepareSwap(html)
   micromorph(document.body, html.body)
 
   // scroll into place and add history
@@ -119,6 +172,7 @@ async function _navigate(url: URL, isBack: boolean = false) {
       window.scrollTo({ top: 0 })
     }
   }
+  fadeIn()
 
   // now, patch head, re-executing scripts
   const elementsToRemove = document.head.querySelectorAll(":not([data-persist])")

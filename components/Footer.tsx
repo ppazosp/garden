@@ -17,12 +17,18 @@ export default ((opts?: Options) => {
     return (
       <footer class={`${displayClass ?? ""}`}>
         <p>
-          Created with <a href="https://quartz.jzhao.xyz/">Quartz</a> © {year}
+          Created with{" "}
+          <a href="https://quartz.jzhao.xyz/" target="_blank" rel="noopener">
+            Quartz
+          </a>{" "}
+          © {year}
         </p>
         <ul>
           {Object.entries(links).map(([text, link]) => (
             <li>
-              <a href={link}>{text}</a>
+              <a href={link} target="_blank" rel="noopener">
+                {text}
+              </a>
             </li>
           ))}
         </ul>

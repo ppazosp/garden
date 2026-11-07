@@ -105,6 +105,11 @@ button.desktop-explorer h2 {
   color: var(--dark);
   opacity: 0.75;
   pointer-events: all;
+  // the current-page highlight moves between links when navigating (explorer.inline.ts),
+  // timed like the article fade-in in custom.scss
+  transition:
+    color 140ms ease-out,
+    opacity 140ms ease-out;
 }
 .explorer-content ul li > a.active {
   opacity: 1;
