@@ -3,6 +3,7 @@ title: Agrex
 created: 2026-04-07
 modified: 2026-07-12
 published: 2026-04-07
+banner: /static/agrex.webp
 description: A real-time graph visualizer for AI agent execution flows — React package, Python tracer, and a drop-in web viewer.
 tags:
   - agents
