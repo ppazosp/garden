@@ -59,7 +59,7 @@ const content: Partial<FullPageLayout> = {
       component: Plugin.RecentNotes({
         title: "Recent posts",
         limit: 5,
-        filter: (f: { slug?: string }) => f.slug !== "index" && f.slug !== "agrex",
+        filter: (f: { slug?: string }) => f.slug !== "index" && f.slug !== "agrex" && f.slug !== "cv",
       }),
       condition: (page) => page.fileData.slug === "index",
     }),
