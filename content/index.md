@@ -6,11 +6,16 @@ aliases:
   - Projects
 ---
 
-I'm Pablo Pazos Parada, an Applied AI Engineer from O Grove, Spain, currently based around Santiago de Compostela. This is my personal blog: a place for thoughts, notes, and the occasional project.
+I'm Pazos, an engineer from Spain, currently working at [Omnia](https://useomnia.com).
 
-I'm here for the 0→1: building what didn't exist yesterday, finding edges nobody bothered to push, shipping things that move something forward even a little. AI agents, infra, automation, open source — if it wasn't moving and now it is, I want to be part of it. This garden is my notebook along the way.
+This is my personal blog: a place for thoughts, notes, and the occasional project.
 
-I write about agents, retrieval, automation, vision, mindset, and whatever I'm trying to understand well enough to build with. When I build something worth showing, it gets its own page, like [[agrex|Agrex]].
+I'm here for the 0→1: building what didn't exist yesterday, finding edges nobody bothered to push, shipping things that move something forward even a little. Lately that means the unglamorous part of agents: the harness, the sandboxes, durable state, recovery when things break. It also means making AI-assisted coding something I can trust, with formal models, conformance suites and review loops. This garden is my notebook along the way.
+
+## Side projects
+
+- [[gitisle|GitIsle]]: your pull requests and agent usage, live in the Mac's notch.
+- [[agrex|Agrex]]: a real-time graph of what your AI agents are doing.
 
 ## Find me
 
