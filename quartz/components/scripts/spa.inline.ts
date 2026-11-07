@@ -62,6 +62,21 @@ function stopLoading() {
   }
 }
 
+// garden: turn the page like a book while the DOM swaps. Following a link turns the page
+// over from the right, going back turns it from the left. Styles are in custom.scss.
+async function pageTurn(isBack: boolean, swap: () => void) {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  if (!document.startViewTransition || reduceMotion) {
+    swap()
+    return
+  }
+  const root = document.documentElement
+  root.dataset.pageTurn = isBack ? "back" : "forward"
+  const transition = document.startViewTransition(swap)
+  transition.finished.finally(() => delete root.dataset.pageTurn)
+  await transition.updateCallbackDone
+}
+
 let isNavigating = false
 let p: DOMParser
 async function _navigate(url: URL, isBack: boolean = false) {
@@ -108,17 +123,19 @@ async function _navigate(url: URL, isBack: boolean = false) {
   html.body.appendChild(announcer)
 
   document.querySelector(".navigation-progress")?.remove()
-  micromorph(document.body, html.body)
+  await pageTurn(isBack, () => {
+    micromorph(document.body, html.body)
 
-  // scroll into place and add history
-  if (!isBack) {
-    if (url.hash) {
-      const el = document.getElementById(decodeURIComponent(url.hash.substring(1)))
-      el?.scrollIntoView()
-    } else {
-      window.scrollTo({ top: 0 })
+    // scroll into place and add history
+    if (!isBack) {
+      if (url.hash) {
+        const el = document.getElementById(decodeURIComponent(url.hash.substring(1)))
+        el?.scrollIntoView()
+      } else {
+        window.scrollTo({ top: 0 })
+      }
     }
-  }
+  })
 
   // now, patch head, re-executing scripts
   const elementsToRemove = document.head.querySelectorAll(":not([data-persist])")

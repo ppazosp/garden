@@ -95,3 +95,79 @@ a.external > .link-favicon {
   vertical-align: -0.12em;
   border-radius: 2px;
 }
+
+// Page turn on navigation (see pageTurn in spa.inline.ts). Adapted from the "page turn"
+// transition in @maxigarcia/view-transitions (ISC): the old page swings away on its spine,
+// shading as it turns, and uncovers the new page underneath.
+@keyframes page-turn-forward {
+  0% {
+    filter: brightness(1);
+    transform: perspective(2000px) rotateY(0deg);
+  }
+  16% {
+    filter: brightness(0.98);
+    transform: perspective(2000px) rotateY(-14deg) rotateX(0.5deg);
+  }
+  42% {
+    filter: brightness(0.92) drop-shadow(-8px 2px 6px rgb(0 0 0 / 0.14));
+    transform: perspective(2000px) rotateY(-50deg) rotateX(0.25deg);
+  }
+  72% {
+    filter: brightness(0.9) drop-shadow(-4px 1px 4px rgb(0 0 0 / 0.1));
+    transform: perspective(2000px) rotateY(-80deg);
+  }
+  100% {
+    filter: brightness(0.9);
+    transform: perspective(2000px) rotateY(-90deg);
+  }
+}
+
+@keyframes page-turn-back {
+  0% {
+    filter: brightness(1);
+    transform: perspective(2000px) rotateY(0deg);
+  }
+  16% {
+    filter: brightness(0.98);
+    transform: perspective(2000px) rotateY(14deg) rotateX(0.5deg);
+  }
+  42% {
+    filter: brightness(0.92) drop-shadow(8px 2px 6px rgb(0 0 0 / 0.14));
+    transform: perspective(2000px) rotateY(50deg) rotateX(0.25deg);
+  }
+  72% {
+    filter: brightness(0.9) drop-shadow(4px 1px 4px rgb(0 0 0 / 0.1));
+    transform: perspective(2000px) rotateY(80deg);
+  }
+  100% {
+    filter: brightness(0.9);
+    transform: perspective(2000px) rotateY(90deg);
+  }
+}
+
+html[data-page-turn]::view-transition-group(root) {
+  animation: none;
+  overflow: visible;
+  transform-style: preserve-3d;
+}
+html[data-page-turn]::view-transition-image-pair(root) {
+  isolation: isolate;
+  transform-style: preserve-3d;
+}
+html[data-page-turn]::view-transition-new(root) {
+  animation: none;
+  opacity: 1;
+  transform: translateZ(-1px);
+  z-index: 0;
+}
+html[data-page-turn]::view-transition-old(root) {
+  animation: page-turn-forward 650ms cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
+  backface-visibility: hidden;
+  opacity: 1;
+  transform-origin: left center;
+  z-index: 1;
+}
+html[data-page-turn="back"]::view-transition-old(root) {
+  animation-name: page-turn-back;
+  transform-origin: right center;
+}
