@@ -122,11 +122,19 @@ async function _navigate(url: URL, isBack: boolean = false) {
   announcer.dataset.persist = ""
   html.body.appendChild(announcer)
 
-  // garden: the explorer list is built client-side, so the fetched page has it empty. Carry the
-  // current list over; otherwise the crossfade shows the menu vanishing and coming back.
-  const oldLists = document.querySelectorAll(".explorer-ul")
-  html.querySelectorAll(".explorer-ul").forEach((ul, i) => {
-    if (oldLists[i]) ul.replaceChildren(...[...oldLists[i].childNodes].map((n) => n.cloneNode(true)))
+  // garden: the fetched page has the explorer as the server renders it: list empty (it's built
+  // client-side) and not collapsed. Carry the current list and open/closed state over, or the
+  // menu blinks empty, and on narrow screens slides open and shut, on every navigation.
+  const oldExplorers = document.querySelectorAll(".explorer")
+  html.querySelectorAll(".explorer").forEach((explorer, i) => {
+    const old = oldExplorers[i]
+    if (!old) return
+    explorer.classList.toggle("collapsed", old.classList.contains("collapsed"))
+    const expanded = old.getAttribute("aria-expanded")
+    if (expanded !== null) explorer.setAttribute("aria-expanded", expanded)
+    const ul = explorer.querySelector(".explorer-ul")
+    const oldUl = old.querySelector(".explorer-ul")
+    if (ul && oldUl) ul.replaceChildren(...[...oldUl.childNodes].map((n) => n.cloneNode(true)))
   })
 
   document.querySelector(".navigation-progress")?.remove()
