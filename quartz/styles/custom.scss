@@ -96,22 +96,22 @@ a.external > .link-favicon {
   border-radius: 2px;
 }
 
-// Navigation: a quick crossfade while the DOM swaps (see navTransition in spa.inline.ts)
+// Navigation (see navTransition in spa.inline.ts): everything switches at once, then the
+// article column fades in over 120ms. The old page is never drawn on top of the new one.
+html[data-nav] .center {
+  view-transition-name: nav-content;
+}
+html[data-nav]::view-transition-group(root),
 html[data-nav]::view-transition-old(root),
-html[data-nav]::view-transition-new(root) {
-  animation-duration: 120ms;
-  animation-timing-function: ease-out;
+html[data-nav]::view-transition-new(root),
+html[data-nav]::view-transition-group(nav-content) {
+  animation: none;
 }
-html[data-nav]::view-transition-old(root) {
-  animation-name: nav-fade-out;
+html[data-nav]::view-transition-old(nav-content) {
+  display: none;
 }
-html[data-nav]::view-transition-new(root) {
-  animation-name: nav-fade-in;
-}
-@keyframes nav-fade-out {
-  to {
-    opacity: 0;
-  }
+html[data-nav]::view-transition-new(nav-content) {
+  animation: nav-fade-in 120ms ease-out;
 }
 @keyframes nav-fade-in {
   from {

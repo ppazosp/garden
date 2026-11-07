@@ -62,8 +62,8 @@ function stopLoading() {
   }
 }
 
-// garden: crossfade quickly while the DOM swaps, instead of a hard cut. Styles are in
-// custom.scss.
+// garden: swap the page at once and fade the new article in quickly, instead of a hard cut.
+// Styles are in custom.scss.
 async function navTransition(swap: () => void) {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   if (!document.startViewTransition || reduceMotion) {
