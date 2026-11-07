@@ -9,6 +9,9 @@ tags:
   - rag
   - retrieval
   - embeddings
+# old URL from before the posts/ and projects/ folders
+aliases:
+  - realities-of-retrieval
 ---
 
 My first RAG felt like finding a hidden treasure. Then I asked it a simple question and it returned every wrong answer in the corpus. That one failure taught me everything I now know about retrieval.
@@ -35,7 +38,7 @@ Chunk into 500-token pieces and you get four sharper embeddings, each preserving
 
 To an embedding model, the difference between "Article 11" and "Article 12" is tiny compared to the semantic weight of everything around them. In a 200-token chunk full of legal context, the number itself barely shifts the embedding. There's no chunk size that fixes that.
 
-![Embedding space showing dog and cat clustering, computer far away, and Article 11 / Article 12 overlapping](images/embedding-space.svg)
+![Embedding space showing dog and cat clustering, computer far away, and Article 11 / Article 12 overlapping](../images/embedding-space.svg)
 
 ## Textual search has the opposite problem
 
@@ -53,7 +56,7 @@ Hybrid search means running semantic and textual side by side and merging the ra
 
 RRF scores each chunk by combining its rank from both rankings (the formula sums 1/(k+rank), with k usually 60, which flattens differences between top ranks). If chunk X is rank 2 in both semantic and textual, and chunk Y is rank 1 in textual but rank 8 in semantic, X wins. Y had the higher peak, but X was consistently good in both. Consistency beats occasional brilliance.
 
-![RRF combining semantic and textual rankings; chunk X wins over chunk Y because consistency beats peak](images/rrf-fusion.svg)
+![RRF combining semantic and textual rankings; chunk X wins over chunk Y because consistency beats peak](../images/rrf-fusion.svg)
 
 This heavily improved retrieval for both worlds. I could finally ask him about article 14 or 15, trusting he'd find it.
 

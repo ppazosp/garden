@@ -107,7 +107,7 @@ function processTrie(trie, sortFn, filterFn, mapFn) {
 }
 
 // Build trie from content index data
-async function buildFileTrie(dataFns) {
+async function buildFileTrie(dataFns, dates = {}) {
   try {
     const data = await fetchData
 
@@ -118,7 +118,10 @@ async function buildFileTrie(dataFns) {
 
     // Handle both formats: { "slug": {...} } or { "content": { "slug": {...} } }
     const contentData = data.content || data
-    const entries = Object.entries(contentData)
+    // garden: attach post dates (from the explorer element) so sortFn and the rows can use them
+    const entries = Object.entries(contentData).map(([slug, entry]) =>
+      dates[slug] ? [slug, { ...entry, date: dates[slug] }] : [slug, entry],
+    )
 
     if (entries.length === 0) {
       console.warn("[Explorer] No content entries found")
@@ -194,8 +197,10 @@ function renderTree(node, container, currentSlug, folderBehavior, savedState, pa
       folderButton = folderLink
     }
 
-    // Check saved state for collapsed status
-    const isCollapsed = savedState[node.slug] !== undefined ? savedState[node.slug] : true // Default collapsed
+    // Check saved state for collapsed status; otherwise the explorer's folderDefaultState
+    const defaultCollapsed = document.querySelector(".explorer")?.dataset.collapsed !== "open"
+    const isCollapsed =
+      savedState[node.slug] !== undefined ? savedState[node.slug] : defaultCollapsed
 
     // if this folder is a prefix of the current path we want to open it anyways
     const simpleFolderPath = simplifySlug(node.slug)
@@ -220,13 +225,37 @@ function renderTree(node, container, currentSlug, folderBehavior, savedState, pa
     const link = clone.querySelector("a")
     if (link) {
       link.href = resolveBasePath(node.data.slug)
-      link.textContent = node.displayName || node.slugSegment
+      const name = node.displayName || node.slugSegment
+      if (node.data.date) {
+        // garden: posts and projects show their date on the right
+        const title = document.createElement("span")
+        title.className = "explorer-title"
+        title.textContent = name
+        const date = document.createElement("time")
+        date.className = "explorer-date"
+        date.dateTime = node.data.date
+        date.textContent = formatPostDate(node.data.date)
+        link.replaceChildren(title, date)
+      } else {
+        link.textContent = name
+      }
       if (node.data.slug === currentSlug) {
         link.classList.add("active", "is-active")
       }
     }
     container.appendChild(clone)
   }
+}
+
+// "2026-08-17" -> "Aug 17, 2026", the same format as the dates on the pages
+function formatPostDate(ymd) {
+  const [year, month, day] = ymd.split("-").map(Number)
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString("en-US", {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+  })
 }
 
 // Whether two rendered lists are the same tree, ignoring which link is the current page.
@@ -271,7 +300,7 @@ async function handleNavOrRender(e) {
       const folderBehavior = explorer.dataset.behavior || "collapse"
 
       // Build and render the tree
-      const trie = await buildFileTrie(dataFns)
+      const trie = await buildFileTrie(dataFns, JSON.parse(explorer.dataset.dates || "{}"))
 
       // Check if another nav event started while we were fetching
       if (thisGeneration === currentRenderGeneration) {

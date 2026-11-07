@@ -241,3 +241,37 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
     overscroll-behavior: contain;
   }
 }
+
+// garden: post rows put their date on the right; long titles end in an ellipsis
+.explorer-content ul li > a:has(> .explorer-date) {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.explorer-title {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.explorer-date {
+  flex: none;
+  font-size: 0.8rem;
+  font-weight: normal;
+  font-variant-numeric: tabular-nums;
+  color: var(--gray);
+}
+@media all and (max-width: 800px) {
+  // garden: pin the mobile panel to the viewport. As an absolute box it sat 16px past the
+  // right edge of the screen, which cut off the post dates.
+  .explorer .explorer-content {
+    position: fixed;
+    width: 100%;
+    max-width: none;
+    ul.explorer-ul {
+      box-sizing: border-box;
+      padding: 0 1rem;
+    }
+  }
+}

@@ -6,13 +6,16 @@ tags:
   - philosophy
   - mindset
   - startups
+# old URL from before the posts/ and projects/ folders
+aliases:
+  - pursue-the-1
 ---
 
 A few weeks ago, two friends who run their own companies recommended Peter Thiel's *Zero to One*. I read it and it earned the reputation. It's sharp, contrarian, and full of lessons any founder should sit with.
 
 But one idea stayed with me longer than the rest, not because it taught me something new about startups, but because it gave me words for a mindset I already had and couldn't articulate. The core distinction of the book is between 0→1 (making something new) and 1→n (copying what works). Thiel uses it as a framework for building companies. I've been treating it as a framework for building a life.
 
-![0 to 1 vs 1 to n diagram](images/0to1.png)
+![0 to 1 vs 1 to n diagram](../images/0to1.png)
 *From Zero to One, by Peter Thiel.*
 
 ## 0 to 1 is a moral claim

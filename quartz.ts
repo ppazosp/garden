@@ -25,7 +25,32 @@ import TableOfContents from "./components/TableOfContents"
 // script, and two explorers or TOCs would each bind the same toggle and cancel out.
 const search = Search()
 const darkmode = Darkmode()
-const explorer = Explorer()
+const explorer = Explorer({
+  folderDefaultState: "open",
+  // folder pages aren't in the content index, so name folders from their slug: "posts" → "Posts"
+  mapFn: (node) => {
+    if (node.isFolder && node.slugSegment) {
+      node.displayName = node.slugSegment[0].toUpperCase() + node.slugSegment.slice(1)
+    }
+    return node
+  },
+  // Projects, then Posts; pages newest first (dates come from the explorer, see pageDates),
+  // anything without a date alphabetical. Serialised to the browser, so it can't use outer variables.
+  sortFn: (a, b) => {
+    if (a.isFolder && b.isFolder) {
+      const order = ["projects", "posts"]
+      return order.indexOf(a.slugSegment ?? "") - order.indexOf(b.slugSegment ?? "")
+    }
+    if (a.isFolder !== b.isFolder) return a.isFolder ? -1 : 1
+    const dateA = a.data?.date as string | undefined
+    const dateB = b.data?.date as string | undefined
+    if (dateA && dateB) return dateB.localeCompare(dateA)
+    return (a.displayName ?? "").localeCompare(b.displayName ?? "", undefined, {
+      numeric: true,
+      sensitivity: "base",
+    })
+  },
+})
 
 const left = (withReaderMode: boolean) => [
   Plugin.PageTitle(),
@@ -60,8 +85,9 @@ const content: Partial<FullPageLayout> = {
       component: Plugin.RecentNotes({
         title: "Recent posts",
         limit: 5,
-        // project pages stay out of the post list
-        filter: (f: { slug?: string }) => !["index", "agrex", "gitisle"].includes(f.slug ?? ""),
+        // posts only: not the folder index pages
+        filter: (f: { slug?: string }) =>
+          !!f.slug?.startsWith("posts/") && !f.slug.endsWith("/index"),
       }),
       condition: (page) => page.fileData.slug === "index",
     }),
@@ -108,11 +134,14 @@ config.plugins.emitters.push(BannerImages(), FontPreload(), LinkFaviconImages())
 
 // Quartz 5 hands generated pages (tag listings) to ContentIndex too, dated "now", so they
 // crowded posts out of the RSS feed and showed up in search. Index real notes only, as in v4.
+// The posts/ and projects/ folder pages are left out for the same reason.
 const contentIndex = config.plugins.emitters.find((e) => e.name === "ContentIndex")
 if (!contentIndex) throw new Error("quartz.ts: ContentIndex emitter not found")
 const { emit, partialEmit } = contentIndex
 const realPages = (ctx: BuildCtx, content: ProcessedContent[]) =>
-  content.filter((entry) => !ctx.virtualPages.includes(entry))
+  content.filter(
+    (entry) => !ctx.virtualPages.includes(entry) && !entry[1].data.slug?.endsWith("/index"),
+  )
 contentIndex.emit = (ctx, content, resources) =>
   emit.call(contentIndex, ctx, realPages(ctx, content), resources)
 if (partialEmit) {

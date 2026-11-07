@@ -60,6 +60,26 @@ function concatenateResources(...resources: (string | undefined)[]): string {
   return resources.filter((r): r is string => !!r).join("\n")
 }
 
+// garden: dates of posts and projects, keyed by slug. The content index the explorer reads
+// leaves dates out, so they ride along on the explorer element; the menu sorts and labels by them.
+function pageDates({ allFiles }: QuartzComponentProps): Record<string, string> {
+  const dates: Record<string, string> = {}
+  for (const file of allFiles) {
+    const date = file.dates?.published ?? file.dates?.created
+    const inFolder = file.slug?.startsWith("posts/") || file.slug?.startsWith("projects/")
+    if (inFolder && !file.slug!.endsWith("/index") && date) {
+      // the calendar date as written, so no reader's time zone can shift it a day
+      const d = new Date(date)
+      dates[file.slug!] = [
+        d.getFullYear(),
+        String(d.getMonth() + 1).padStart(2, "0"),
+        String(d.getDate()).padStart(2, "0"),
+      ].join("-")
+    }
+  }
+  return dates
+}
+
 export default ((userOpts?: Partial<ExplorerOptions>) => {
   const opts: ExplorerOptions = { ...defaultOptions, ...userOpts }
   const { OverflowList, overflowListAfterDOMLoaded } = OverflowListFactory()
@@ -75,6 +95,7 @@ export default ((userOpts?: Partial<ExplorerOptions>) => {
         data-behavior={opts.folderClickBehavior}
         data-collapsed={opts.folderDefaultState}
         data-savestate={opts.useSavedState}
+        data-dates={JSON.stringify(pageDates(props))}
         data-data-fns={JSON.stringify({
           order: opts.order,
           sortFn: opts.sortFn?.toString(),
