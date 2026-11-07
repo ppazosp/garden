@@ -62,19 +62,19 @@ function stopLoading() {
   }
 }
 
-// garden: crossfade quickly while the DOM swaps, instead of a hard cut. Styles are in
-// custom.scss.
+// garden: swap the page at once, then fade the new article in (styles in custom.scss). A plain
+// CSS animation rather than a View Transition: no snapshots, so old and new text never overlap,
+// and it runs the same in every browser.
 async function navTransition(swap: () => void) {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  if (!document.startViewTransition || reduceMotion) {
-    swap()
-    return
-  }
-  const root = document.documentElement
-  root.dataset.nav = ""
-  const transition = document.startViewTransition(swap)
-  transition.finished.finally(() => delete root.dataset.nav)
-  await transition.updateCallbackDone
+  swap()
+  const center = document.querySelector<HTMLElement>(".center")
+  if (!center) return
+  center.classList.remove("nav-enter")
+  void center.offsetWidth // restart the animation if it is still running
+  center.classList.add("nav-enter")
+  center.addEventListener("animationend", () => center.classList.remove("nav-enter"), {
+    once: true,
+  })
 }
 
 let isNavigating = false

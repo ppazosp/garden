@@ -96,18 +96,17 @@ a.external > .link-favicon {
   border-radius: 2px;
 }
 
-// Navigation (see navTransition in spa.inline.ts): the new page fades in over the old one,
-// which stays fully opaque underneath. A two-way crossfade dims everything at its midpoint,
-// so even the parts that don't change (sidebar, header) visibly flicker; this way they don't.
-html[data-nav]::view-transition-group(root),
-html[data-nav]::view-transition-old(root) {
-  animation: none;
-}
-html[data-nav]::view-transition-new(root) {
+// Navigation (see navTransition in spa.inline.ts): the new article fades in after the swap.
+.center.nav-enter {
   animation: nav-fade-in 120ms ease-out;
 }
 @keyframes nav-fade-in {
   from {
     opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .center.nav-enter {
+    animation: none;
   }
 }
