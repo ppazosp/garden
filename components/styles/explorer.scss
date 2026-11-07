@@ -242,9 +242,11 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
   }
 }
 
-// garden: the mobile panel. The menu icon turns into a close icon, the site name sits beside it,
-// and pages are full-width rows with the current one marked.
-.explorer .mobile-panel-title,
+// garden: the mobile menu is a drawer that slides out under the header, which stays usable.
+// The menu icon turns into a close icon, the page behind is dimmed (tap it to close), and long
+// titles end in an ellipsis.
+$mobile-header: 70px; // the left sidebar's height in the mobile layout (1rem padding + 38px)
+
 .explorer .mobile-explorer .lucide-x {
   display: none;
 }
@@ -278,41 +280,51 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
     }
   }
 
-  .explorer .mobile-panel-title {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4.375rem; // centred on the toggle button, which sits 18–52px from the top
-    margin: 0;
-    padding: 0 1rem 0 3.75rem;
-    display: flex;
-    align-items: center;
-    font-family: var(--titleFont);
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--dark);
-    border-bottom: 1px solid var(--lightgray);
+  // the page stays where it is under the dim layer instead of sliding off-screen
+  .page > #quartz-body.lock-scroll > :not(.sidebar.left:has(.explorer)) {
+    transform: none;
+  }
+  .explorer::before {
+    content: "";
+    position: fixed;
+    inset: $mobile-header 0 0 0;
+    background: rgb(0 0 0 / 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+    z-index: 99;
+  }
+  .explorer:not(.collapsed)::before {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .explorer .explorer-content {
     // pinned to the viewport: as an absolute box it sat 16px right of the screen edge
     position: fixed;
-    width: 100%;
+    top: $mobile-header;
+    width: min(80vw, 320px);
     max-width: none;
-    padding-top: 4.875rem;
+    height: calc(100dvh - #{$mobile-header});
+    max-height: none;
+    padding: 0.75rem 0 2rem;
+    border-top: 1px solid var(--lightgray);
+    box-shadow: 8px 0 24px rgb(0 0 0 / 0.15);
     ul.explorer-ul {
       box-sizing: border-box;
-      padding: 0 1rem;
-      // the overflow fade is measured while the panel sits off-screen, so it misfires here
+      padding: 0 0.75rem;
+      // the overflow fade is measured while the drawer sits off-screen, so it misfires here
       mask-image: none;
     }
     ul li > a {
       display: block;
-      padding: 0.75rem 0.75rem;
+      padding: 0.75rem;
       font-size: 1.05rem;
       border-radius: 6px;
       opacity: 0.8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     ul li > a.active {
       opacity: 1;

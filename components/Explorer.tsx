@@ -145,7 +145,6 @@ export default ((userOpts?: Partial<ExplorerOptions>) => {
           </svg>
         </button>
         <div id={id} class="explorer-content" aria-expanded={false} role="group">
-          <p class="mobile-panel-title">{props.cfg?.pageTitle}</p>
           <OverflowList class="explorer-ul" />
         </div>
         <template id="template-file">

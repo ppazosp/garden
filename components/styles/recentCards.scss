@@ -1,0 +1,70 @@
+.recent-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0 0 1.5rem;
+
+  @media all and (max-width: 800px) {
+    // a swipeable row on phones
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-right: -1rem;
+    padding-right: 1rem;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .recent-card {
+      flex: 0 0 75%;
+      scroll-snap-align: start;
+    }
+  }
+}
+
+.recent-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--lightgray);
+  border-radius: 10px;
+  color: var(--dark);
+  font-weight: normal;
+  background-color: transparent;
+  transition:
+    background-color 140ms ease-out,
+    border-color 140ms ease-out;
+
+  &:hover {
+    color: var(--dark);
+    background-color: var(--highlight);
+    border-color: var(--gray);
+  }
+
+  time {
+    font-size: 0.8rem;
+    color: var(--gray);
+  }
+}
+
+.recent-card-title,
+.recent-card-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.recent-card-title {
+  font-family: var(--headerFont);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.recent-card-desc {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--darkgray);
+}

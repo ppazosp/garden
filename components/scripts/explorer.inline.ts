@@ -335,6 +335,15 @@ async function handleNavOrRender(e) {
         cleanupHandlers.push(() => button.removeEventListener("click", clickHandler))
       }
 
+      // garden: tapping the dimmed page beside the mobile drawer closes it. The dim layer is the
+      // explorer's own ::before, so those taps land on the explorer element itself.
+      const backdropHandler = (evt) => {
+        if (evt.target !== explorer || explorer.classList.contains("collapsed")) return
+        explorer.querySelector(".mobile-explorer")?.click()
+      }
+      explorer.addEventListener("click", backdropHandler)
+      cleanupHandlers.push(() => explorer.removeEventListener("click", backdropHandler))
+
       const folderIcons = explorer.getElementsByClassName("folder-icon")
       for (const icon of folderIcons) {
         const iconClickHandler = function (evt) {
