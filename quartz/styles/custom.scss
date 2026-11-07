@@ -96,17 +96,24 @@ a.external > .link-favicon {
   border-radius: 2px;
 }
 
-// Navigation (see navTransition in spa.inline.ts): the new article fades in after the swap.
-.center.nav-enter {
-  animation: nav-fade-in 120ms ease-out;
-}
-@keyframes nav-fade-in {
-  from {
+// Navigation (see fadeOut/fadeIn in spa.inline.ts): the article text fades out while the next
+// page loads and the new text fades in after the swap. The banner is left alone unless the
+// next page's image differs (.nav-banner).
+.center {
+  & > :not(.page-header),
+  & > .page-header > .popover-hint > * {
+    transition: opacity 140ms ease-out;
+  }
+  &.nav-out > :not(.page-header),
+  &.nav-out > .page-header > .popover-hint > :not(.page-banner),
+  &.nav-out.nav-banner > .page-header > .popover-hint > .page-banner {
     opacity: 0;
+    transition: opacity 90ms ease-in;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .center.nav-enter {
-    animation: none;
+  .center > :not(.page-header),
+  .center > .page-header > .popover-hint > * {
+    transition: none;
   }
 }

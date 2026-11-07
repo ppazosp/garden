@@ -62,19 +62,39 @@ function stopLoading() {
   }
 }
 
-// garden: swap the page at once, then fade the new article in (styles in custom.scss). A plain
-// CSS animation rather than a View Transition: no snapshots, so old and new text never overlap,
-// and it runs the same in every browser.
-async function navTransition(swap: () => void) {
-  swap()
-  const center = document.querySelector<HTMLElement>(".center")
-  if (!center) return
-  center.classList.remove("nav-enter")
-  void center.offsetWidth // restart the animation if it is still running
-  center.classList.add("nav-enter")
-  center.addEventListener("animationend", () => center.classList.remove("nav-enter"), {
-    once: true,
-  })
+// garden: fade the old article out while the next page loads, swap, then fade the new one in.
+// Old and new text are never on screen together, and the banner only fades when the image
+// actually changes. Plain CSS transitions on .center (custom.scss), so every browser runs them
+// the same. Returns a promise that settles once the old text is gone.
+const FADE_OUT_MS = 90
+function fadeOut(): Promise<void> {
+  const center = document.querySelector(".center")
+  if (!center || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return Promise.resolve()
+  }
+  center.classList.add("nav-out")
+  return new Promise((resolve) => setTimeout(resolve, FADE_OUT_MS))
+}
+
+// Carry the faded state into the fetched page so its content arrives invisible.
+async function prepareSwap(next: Document) {
+  const center = document.querySelector(".center")
+  if (!center?.classList.contains("nav-out")) return
+  const banner = (doc: Document | Element) => doc.querySelector(".page-banner")?.getAttribute("src")
+  if (banner(center) !== banner(next)) {
+    center.classList.add("nav-banner")
+    await new Promise((resolve) => setTimeout(resolve, FADE_OUT_MS))
+  }
+  next.querySelector(".center")?.classList.add(...center.classList)
+}
+
+function fadeIn() {
+  // two frames, so the new content is painted at opacity 0 before it transitions in
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() =>
+      document.querySelector(".center")?.classList.remove("nav-out", "nav-banner"),
+    ),
+  )
 }
 
 let isNavigating = false
@@ -82,6 +102,7 @@ let p: DOMParser
 async function _navigate(url: URL, isBack: boolean = false) {
   isNavigating = true
   startLoading()
+  const fadedOut = fadeOut()
   p = p || new DOMParser()
   const contents = await fetchCanonical(url)
     .then((res) => {
@@ -97,6 +118,7 @@ async function _navigate(url: URL, isBack: boolean = false) {
     })
 
   if (!contents) return
+  await fadedOut
 
   // notify about to nav
   const event: CustomEventMap["prenav"] = new CustomEvent("prenav", { detail: {} })
@@ -138,19 +160,19 @@ async function _navigate(url: URL, isBack: boolean = false) {
   })
 
   document.querySelector(".navigation-progress")?.remove()
-  await navTransition(() => {
-    micromorph(document.body, html.body)
+  await prepareSwap(html)
+  micromorph(document.body, html.body)
 
-    // scroll into place and add history
-    if (!isBack) {
-      if (url.hash) {
-        const el = document.getElementById(decodeURIComponent(url.hash.substring(1)))
-        el?.scrollIntoView()
-      } else {
-        window.scrollTo({ top: 0 })
-      }
+  // scroll into place and add history
+  if (!isBack) {
+    if (url.hash) {
+      const el = document.getElementById(decodeURIComponent(url.hash.substring(1)))
+      el?.scrollIntoView()
+    } else {
+      window.scrollTo({ top: 0 })
     }
-  })
+  }
+  fadeIn()
 
   // now, patch head, re-executing scripts
   const elementsToRemove = document.head.querySelectorAll(":not([data-persist])")
