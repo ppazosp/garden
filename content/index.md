@@ -12,6 +12,11 @@ This is my personal blog: a place for thoughts, notes, and the occasional projec
 
 I'm here for the 0→1: building what didn't exist yesterday, finding edges nobody bothered to push, shipping things that move something forward even a little. Lately that means the unglamorous part of agents: the harness, the sandboxes, durable state, recovery when things break. It also means making AI-assisted coding something I can trust, with formal models, conformance suites and review loops. This garden is my notebook along the way.
 
+## Side projects
+
+- [[gitisle|GitIsle]]: your pull requests and agent usage, live in the Mac's notch.
+- [[agrex|Agrex]]: a real-time graph of what your AI agents are doing.
+
 ## Find me
 
 - [LinkedIn](https://www.linkedin.com/in/pablo-pazos-parada)
