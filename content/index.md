@@ -14,7 +14,6 @@ I write about agents, retrieval, infrastructure, mindset, and whatever I'm tryin
 
 ## Find me
 
-- [[cv|CV]]
 - [LinkedIn](https://www.linkedin.com/in/pablo-pazos-parada)
 - [X](https://x.com/ppazosp)
 - [GitHub](https://github.com/ppazosp)
