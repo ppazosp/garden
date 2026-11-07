@@ -62,30 +62,24 @@ function stopLoading() {
   }
 }
 
-// garden: fade the old article out while the next page loads, swap, then fade the new one in.
-// Old and new text are never on screen together, and the banner only fades when the image
-// actually changes. Plain CSS transitions on .center (custom.scss), so every browser runs them
-// the same. Returns a promise that settles once the old text is gone.
+// garden: once the next page is in, fade the old article out, swap, then fade the new one in.
+// Text and banner fade together, but the banner only when the image actually changes; old and
+// new content are never on screen together. Plain CSS transitions on .center (custom.scss), so
+// every browser runs them the same.
 const FADE_OUT_MS = 90
-function fadeOut(): Promise<void> {
+function fadeOut(next: Document): Promise<void> {
   const center = document.querySelector(".center")
   if (!center || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     return Promise.resolve()
   }
+  const banner = (root: Document | Element) =>
+    root.querySelector(".page-banner")?.getAttribute("src")
   center.classList.add("nav-out")
-  return new Promise((resolve) => setTimeout(resolve, FADE_OUT_MS))
-}
-
-// Carry the faded state into the fetched page so its content arrives invisible.
-async function prepareSwap(next: Document) {
-  const center = document.querySelector(".center")
-  if (!center?.classList.contains("nav-out")) return
-  const banner = (doc: Document | Element) => doc.querySelector(".page-banner")?.getAttribute("src")
-  if (banner(center) !== banner(next)) {
-    center.classList.add("nav-banner")
-    await new Promise((resolve) => setTimeout(resolve, FADE_OUT_MS))
-  }
+  if (banner(center) !== banner(next)) center.classList.add("nav-banner")
+  // the fetched page arrives faded too, so its content starts invisible
   next.querySelector(".center")?.classList.add(...center.classList)
+  // a little past the transition, so nothing is swapped while still faintly visible
+  return new Promise((resolve) => setTimeout(resolve, FADE_OUT_MS + 30))
 }
 
 function fadeIn() {
@@ -97,28 +91,48 @@ function fadeIn() {
   )
 }
 
+// garden: start loading a page when a link to it is hovered or touched, so the fade can start
+// as soon as it's clicked. Each prefetch is used by one navigation at most.
+const prefetched = new Map<string, Promise<string | undefined>>()
+const pageKey = (url: URL) => url.origin + url.pathname + url.search
+
+function loadPage(url: URL): Promise<string | undefined> {
+  const key = pageKey(url)
+  const pending = prefetched.get(key)
+  prefetched.delete(key)
+  return (
+    pending ??
+    fetchCanonical(url)
+      .then((res) =>
+        res.headers.get("content-type")?.startsWith("text/html") ? res.text() : undefined,
+      )
+      .catch(() => undefined)
+  )
+}
+
+function prefetch(event: Event) {
+  const link = (event.target as Element | null)?.closest?.("a")
+  if (!link || link.target || link.hasAttribute("download")) return
+  const url = new URL(link.href, window.location.href)
+  if (url.origin !== window.location.origin || isSamePage(url)) return
+  const key = pageKey(url)
+  if (!prefetched.has(key)) prefetched.set(key, loadPage(url))
+}
+
 let isNavigating = false
 let p: DOMParser
 async function _navigate(url: URL, isBack: boolean = false) {
   isNavigating = true
   startLoading()
-  const fadedOut = fadeOut()
   p = p || new DOMParser()
-  const contents = await fetchCanonical(url)
-    .then((res) => {
-      const contentType = res.headers.get("content-type")
-      if (contentType?.startsWith("text/html")) {
-        return res.text()
-      } else {
-        window.location.assign(url)
-      }
-    })
-    .catch(() => {
-      window.location.assign(url)
-    })
+  const contents = await loadPage(url)
+  if (!contents) {
+    window.location.assign(url)
+    return
+  }
 
-  if (!contents) return
-  await fadedOut
+  const html = p.parseFromString(contents, "text/html")
+  await fadeOut(html)
 
   // notify about to nav
   const event: CustomEventMap["prenav"] = new CustomEvent("prenav", { detail: {} })
@@ -128,7 +142,6 @@ async function _navigate(url: URL, isBack: boolean = false) {
   cleanupFns.forEach((fn) => fn())
   cleanupFns.clear()
 
-  const html = p.parseFromString(contents, "text/html")
   normalizeRelativeURLs(html, url)
 
   let title = html.querySelector("title")?.textContent
@@ -160,7 +173,6 @@ async function _navigate(url: URL, isBack: boolean = false) {
   })
 
   document.querySelector(".navigation-progress")?.remove()
-  await prepareSwap(html)
   micromorph(document.body, html.body)
 
   // scroll into place and add history
@@ -223,6 +235,9 @@ function createRouter() {
 
       navigate(url, false)
     })
+
+    window.addEventListener("pointerover", prefetch, { passive: true })
+    window.addEventListener("touchstart", prefetch, { passive: true })
 
     window.addEventListener("popstate", (event) => {
       const { url } = getOpts(event) ?? {}
