@@ -43,7 +43,7 @@ const left = (withReaderMode: boolean) => [
 
 const footer = [Footer({ links: {} })]
 
-// pages that aren't posts: kept out of the recent-post cards and list
+// pages that aren't posts: kept out of the recent-post cards
 const notPosts = ["index", "agrex", "gitisle"]
 
 const content: Partial<FullPageLayout> = {
@@ -63,16 +63,7 @@ const content: Partial<FullPageLayout> = {
   ],
   left: left(true),
   right: [Graph(), Component.DesktopOnly(TableOfContents()), Plugin.Backlinks()],
-  afterBody: [
-    Component.ConditionalRender({
-      component: Plugin.RecentNotes({
-        title: "Recent posts",
-        limit: 5,
-        filter: (f: { slug?: string }) => !notPosts.includes(f.slug ?? ""),
-      }),
-      condition: (page) => page.fileData.slug === "index",
-    }),
-  ],
+  afterBody: [],
   footer,
 }
 

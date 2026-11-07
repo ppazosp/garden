@@ -127,6 +127,7 @@ plugins:
     enabled: true
   - source: "@quartz-community/spacer"
     enabled: true
+  # Replaced by the recent-post cards on the home page (components/RecentCards.tsx).
   - source: "@quartz-community/recent-notes"
-    enabled: true
+    enabled: false
 # Page layout is defined in quartz.ts.
