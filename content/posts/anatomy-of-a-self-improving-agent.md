@@ -1,8 +1,8 @@
 ---
 title: Anatomy of a self-improving agent
-created: 2026-07-12
-modified: 2026-07-12
-published: 2026-07-12
+created: 2026-07-26
+modified: 2026-07-26
+published: 2026-07-26
 description: The three pieces of a self-improving agent walked through with Hermes Agent as the case study, the skill_manage tool, the background reviewer, and the curator.
 tags:
   - agents
