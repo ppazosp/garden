@@ -1,7 +1,7 @@
 ---
-title: Orchestrator vs Choreography
+title: Learnings from building a super-agent
 date: 2026-11-10
-description: Building a super-agent clone, I had to decide between an orchestrator and a choreography. The answer was neither, purely, but a choreography of orchestrators.
+description: Notes from building my own clone of DeepSeek's super-agent. Orchestrator or choreography? Neither, purely, but a choreography of orchestrators, with a router that does almost nothing.
 banner: /static/orchestrator.webp
 tags:
   - agents
@@ -11,7 +11,9 @@ tags:
 draft: false
 ---
 
-While building a super-agent clone, a lot of important design questions surfaced. The biggest one has haunted software engineering for a long time already: do you build the system around an orchestrator or around a choreography? Neither, purely.
+At the end of October, the DeepSeek Harness team published [a design exploration of what they call a super-agent](https://zhuanlan.zhihu.com/p/2099987320443237060) (in Chinese), together with [an open-source prototype](https://github.com/deepseek-ai/dsh-superagent-prototype). I built my own clone of it, and this post is what I learned along the way.
+
+A lot of important design questions surfaced while building it. The biggest one has haunted software engineering for a long time already: do you build the system around an orchestrator or around a choreography? Neither, purely.
 
 ## Conductor or dance floor?
 
@@ -32,13 +34,13 @@ orchestration
                   └───────┘  └───────┘  └───────┘
 
 choreography
-                  ┌───────┐  ┌───────┐  ┌───────┐
-                  │ agent │  │ agent │  │ agent │       no leader,
-                  └──┬─▲──┘  └──┬─▲──┘  └──┬─▲──┘       each agent owns
-                     ▼ │        ▼ │        ▼ │          its part
-              ┌─ broker ────────────────────────────┐
-              │  events in, events out              │
-              └─────────────────────────────────────┘
+              ┌───────┐    ┌───────┐    ┌───────┐    no leader,
+              │ agent │◀──▶│ agent │◀──▶│ agent │    agents message
+              └──┬─▲──┘    └──┬─▲──┘    └──┬─▲──┘    each other and
+                 ▼ │          ▼ │          ▼ │       share events
+          ┌─ events ────────────────────────────────┐
+          │  triggers in, updates out               │
+          └─────────────────────────────────────────┘
 ```
 
 </div>
@@ -48,11 +50,11 @@ choreography
 
 The trade-offs carry over too. An orchestrated multi-agent system fits a complex workflow where every step needs coordination and approval; if a step fails, the orchestrator recovers it and moves on. A choreography fits independent tasks, where an orchestrator would only add latency and mix up facts.
 
-Anyways, keep in mind that a choreography still has a message broker; events need somewhere to go.
+Keep in mind that a choreography still needs somewhere for events to land, even when agents also message each other directly.
 
 ## Is the router secretly a conductor?
 
-The DeepSeek article describes a super-agent: a multi-agent system that speeds up software work by adding proactiveness and autonomy to a typical harness, without losing visibility or understanding. One of its most important ideas, and one that often gets overlooked, is that the system must keep the ability to steer each task and to deliver information to each task fast. If the information arrives late, the thing it was meant to prevent may already have happened.
+The DeepSeek article describes a super-agent: a multi-agent system that speeds up software work by adding proactiveness and autonomy to a typical [[anatomy-of-a-self-improving-agent|harness]], without losing visibility or understanding. One of its most important ideas, and one that often gets overlooked, is that the system must keep the ability to steer each task and to deliver information to each task fast. If the information arrives late, the thing it was meant to prevent may already have happened.
 
 The super-agent is made of a router and its workers. The router's whole job is to digest outside information from many sources (Slack, GitHub, and so on) and decide what to do with it: dispatch a new worker, or get the information to one that is already working on it. Reading the article, some people may see the router as an orchestrator. An agent whose job is to create other agents and manage the information they get sounds a lot like one. Add the watchdog, which checks that workers are making progress, and it is fair to say you are describing an orchestrator.
 
@@ -123,19 +125,19 @@ Here I deliberately diverge from DeepSeek. In their design, workers never talk t
 <div class="ascii-diagram">
 
 ```
-   ┌─ channels ───────────────────────────────────────────────────────────┐
-   │  you and your team                                                   │
-   └──────┬─────────────────────────▲─────────────────────────────▲───────┘
-          │ new messages            │ each worker talks in        │
-          │                         │ its own conversation        │
-          ▼                         ▼                             ▼
-   ┌─ router ─────┐          ┌─ worker A ───┐              ┌─ worker B ───┐
-   │  filters     │─────────▶│  bug fix     │◀── facts ───▶│  new feature │
-   │  and routes  │          │              │  not orders  │              │
-   └──▲──────┬────┘          └──────┬───────┘              └──────▲───────┘
-      │      │                      │                             │
-      │      └──────────────────────┼─────────────────────────────┘ pointers
-      └─────────────────────────────┘ asks for a new worker
+ ┌─ channels ───────────────────────────────────────────────────────────┐
+ │  you and your team                                                   │
+ └──────┬─────────────────────────▲─────────────────────────────▲───────┘
+        │ new messages            │ each worker talks in        │
+        │                         │ its own conversation        │
+        ▼                         ▼                             ▼
+ ┌─ router ─────┐          ┌─ worker A ───┐              ┌─ worker B ───┐
+ │  filters     │─────────▶│  bug fix     │◀── facts ───▶│  new feature │
+ │  and routes  │          │              │  not orders  │              │
+ └──▲──────┬────┘          └──────┬───────┘              └──────▲───────┘
+    │      │                      │                             │
+    │      └──────────────────────┼─────────────────────────────┘ pointers
+    └─────────────────────────────┘ asks for a new worker
 ```
 
 </div>
@@ -177,7 +179,7 @@ together
 
 Being completely honest, memory is the part I am least sure about. But I have landed somewhere.
 
-The threads already are the memory. If a worker needs to know what is being worked on or what was done recently, it can read transcripts or past tasks. That is less efficient than a dedicated memory system, but much more accurate and less lossy. And it can be made fast: a worker reads a thread's final answer first, and only goes further back when that is not enough. The harnesses underneath (Claude Code, Codex) also keep their own notes.
+The threads already are the memory. If a worker needs to know what is being worked on or what was done recently, it can read transcripts or past tasks. That is less efficient than a dedicated memory system, but much more accurate and less lossy. And it can be made fast: a worker reads a thread's final answer first, and only goes further back when that is not enough. The harnesses underneath ([Claude Code](https://claude.com/product/claude-code), [Codex](https://openai.com/codex/)) also keep their own notes.
 
 I also asked myself whether the router should have access to a memory. At first I thought it should know everything, but as I said, the router must stay as lean as possible; making it know everything would close the gap to being an orchestrator. The only things the router needs are what workers are working on and what they have worked on, and both come straight from the threads.
 
@@ -212,7 +214,7 @@ with a wiki
 
 </div>
 
-Anthropic's write-up on agent memory points the same way: in their tests a wiki plus search beat search alone on questions that need facts spread across many documents, though a wiki can also grow bigger than what it summarises if nobody prunes it.
+[Anthropic's write-up on agent memory](https://www.anthropic.com/engineering/components-of-agent-memory) points the same way: in their tests a wiki beat search alone on questions that need facts spread across many documents (87% against 73% on cross-document legal questions), though a wiki can also grow bigger than what it summarises if nobody prunes it.
 
 ## If I had to keep one idea
 
