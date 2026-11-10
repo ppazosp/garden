@@ -4,6 +4,7 @@ date: 2026-11-10
 description: Notes from building my own clone of DeepSeek's super-agent. Orchestrator or choreography? Neither, purely, but a choreography of orchestrators, with a router that does almost nothing.
 banner: /static/orchestrator.webp
 tags:
+  - learnings
   - agents
   - multi-agent
   - architecture
