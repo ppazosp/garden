@@ -17,7 +17,7 @@ aliases:
 
 Some months ago, Hermes Agent exploded in virality as being an open source agent harness that could self-improve itself. Because it is open source, that self-improvement loop was there for everyone to see from day one. I just never made the time to actually look at how it worked.
 
-## From that first launch, Nous Research team have been improving the product a lot, making people forget about the last reigning king, OpenClaw. Some days ago, they released a new feature called The Curator that made me full stop and analyze what was there, because I had the feeling it was something that I would love.
+From that first launch, Nous Research team have been improving the product a lot, making people forget about the last reigning king, OpenClaw. Some days ago, they released a new feature called The Curator that made me full stop and analyze what was there, because I had the feeling it was something that I would love.
 
 ## So first of all, what is a harness
 So to explain it simply, it's everything that wraps the LLM to turn it into an agent; the loop that lets it think, call tools, see results, and think again, plus context management, tool management, error recovery, sandboxing etc. Claude Code, Codex and Hermes are examples of harnesses.
