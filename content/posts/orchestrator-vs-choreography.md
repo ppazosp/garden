@@ -2,6 +2,7 @@
 title: Orchestrator vs Choreography
 date: 2026-11-10
 description: Building a super-agent clone, I had to decide between an orchestrator and a choreography. The answer was neither, purely, but a choreography of orchestrators.
+banner: /static/orchestrator.webp
 tags:
   - agents
   - multi-agent
