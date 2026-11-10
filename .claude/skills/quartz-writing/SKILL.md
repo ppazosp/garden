@@ -33,6 +33,7 @@ Frontmatter: `title`, `date`, `description`, and `tags` all required. The `descr
 - **Code blocks**: Include when showing examples, commands, or config. Use appropriate language identifier.
 - **Diagrams**: NEVER use mermaid. Always use ASCII art diagrams inside code blocks. They're simpler, more readable, and fit the garden's minimal style.
 - **File naming**: kebab-case, no spaces. Example: `react-agent-patterns.md`.
+- **Banners**: `banner: /static/<name>.webp` in frontmatter. The banner box is 7:3, so make images 1680x720 (`--ar 7:3` in Midjourney); other shapes get cropped to fit.
 
 ## Before Saving
 
