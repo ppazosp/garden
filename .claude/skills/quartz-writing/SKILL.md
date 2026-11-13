@@ -31,7 +31,7 @@ Frontmatter: `title`, `date`, `description`, and `tags` all required. The `descr
 - **Tags**: Use lowercase kebab-case. Common tags: `agents`, `llms`, `tools`, `prompting`, `automation`, `startups`, `open-source`.
 - **Callouts**: Use sparingly. No icons are shown. Keep them for genuinely important tips or warnings.
 - **Code blocks**: Include when showing examples, commands, or config. Use appropriate language identifier.
-- **Diagrams**: NEVER use mermaid. Always use ASCII art diagrams inside code blocks. They're simpler, more readable, and fit the garden's minimal style.
+- **Diagrams**: NEVER use mermaid, and never SVG asset files. Always ASCII art (Unicode box drawing) inside a fenced code block, wrapped in `<div class="ascii-diagram">` with blank lines around the fence so it centres. Code blocks inherit the theme, so this is the only diagram form that works in dark mode; the SVGs in `content/images/` hardcode a white background and show as white rectangles on a dark page. Keep them under ~60 characters wide, and check every `┬ ┴ ┼ ▼` connects to something above or below.
 - **File naming**: kebab-case, no spaces. Example: `react-agent-patterns.md`.
 - **Banners**: `banner: /static/<name>.webp` in frontmatter. The banner box is 7:3, so make images 1680x720 (`--ar 7:3` in Midjourney); other shapes get cropped to fit.
 
