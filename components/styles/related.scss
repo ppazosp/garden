@@ -1,11 +1,5 @@
-// one muted line right under the separator Quartz draws at the end of every post:
-// "Related: A · B"
+// one line right under the separator Quartz draws at the end of every post: "Related: A · B".
+// The text and links keep the page's own colours (body text, internal links).
 .related-posts {
   margin: 0 0 2rem;
-  font-size: 0.95rem;
-  color: var(--gray);
-
-  a {
-    font-weight: 600;
-  }
 }
