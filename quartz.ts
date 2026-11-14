@@ -15,6 +15,7 @@ import { FontPreload } from "./components/FontPreload"
 import Graph from "./components/Graph"
 import { LinkFaviconImages, LinkFavicons } from "./components/LinkFavicons"
 import ReaderMode from "./components/ReaderMode"
+import Related from "./components/Related"
 import Search from "./components/Search"
 import TableOfContents from "./components/TableOfContents"
 
@@ -81,6 +82,8 @@ const content: Partial<FullPageLayout> = {
   left: left(true),
   right: [Graph(), Component.DesktopOnly(TableOfContents()), Plugin.Backlinks()],
   afterBody: [
+    // posts that list `related:` in frontmatter; renders nothing otherwise
+    Related(),
     Component.ConditionalRender({
       component: Plugin.RecentNotes({
         title: "Recent posts",

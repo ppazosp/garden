@@ -8,6 +8,8 @@ tags:
   - harnesses
   - infrastructure
   - state
+related:
+  - anatomy-of-a-self-improving-agent
 draft: false
 # old URL from before the posts/ and projects/ folders
 aliases:
@@ -194,5 +196,3 @@ Most of the work involved is less exotic than it sounds. The journal is JSON and
 Everyone is building the fleet first, because parallel agents and worktrees and teams demo well, while shared remote state demos as nothing at all. It is still the piece that decides whether an orchestrator can put its subagents on other machines, and whether an agent working alone can hold four computers instead of one.
 
 The agent we need does not have a computer. It has computers, it hands them work, it does not much care which one it wakes up on, and the thing that makes them all one agent is a state that none of them owns. That is not a preference about tooling, it is what the next few months of this are going to require: the work is already spread across machines we do not own and cannot keep, so anything that assumes a home is a thing that will eventually be somewhere else. Getting there is not a model problem. It is deciding that the harness is a copy, the state is the agent, and nothing that matters gets written to a place that exists exactly once.
-
-Related: [[anatomy-of-a-self-improving-agent]]

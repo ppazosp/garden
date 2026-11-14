@@ -10,6 +10,9 @@ tags:
 # old URL from before the posts/ and projects/ folders
 aliases:
   - the-first-word-was-never-important
+related:
+  - anatomy-of-a-self-improving-agent
+  - pursue-the-1
 ---
 
 For about a year, I've been living inside coding agents. Most of what I ship day to day gets written by one of them. For most of that year the improvement felt gradual. At first they were prototyping toys, good for a demo if you babysat them long enough. Then they needed less babysitting. Then they started oneshotting the easy stuff.
@@ -56,5 +59,3 @@ Coding was always the commodity. We couldn't see it because, for thirty years, t
 You have a workforce now that can build almost anything you point it at. That does not help if you point it at the wrong thing. The job stopped being writing the code. The job is deciding what gets built, in what order, and why, and being right about it often enough to matter.
 
 You're not a worse coder than the agent. You're just less of a coder now and more of an engineer. The valuable half of the title is the whole job now. Take it, or get managed by someone who already did.
-
-Related: [[anatomy-of-a-self-improving-agent]] [[pursue-the-1]]
