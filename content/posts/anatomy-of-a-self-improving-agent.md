@@ -13,6 +13,9 @@ tags:
 # old URL from before the posts/ and projects/ folders
 aliases:
   - anatomy-of-a-self-improving-agent
+related:
+  - leave-no-state-behind
+  - learnings-from-building-a-super-agent
 ---
 
 Some months ago, Hermes Agent exploded in virality as being an open source agent harness that could self-improve itself. Because it is open source, that self-improvement loop was there for everyone to see from day one. I just never made the time to actually look at how it worked.
