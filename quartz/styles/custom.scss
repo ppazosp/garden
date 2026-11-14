@@ -87,7 +87,11 @@
 }
 
 // favicon before external links (see components/LinkFavicons.ts)
-a.external > .link-favicon {
+// the icon and the link's first word share a no-wrap span, so they never land on two lines
+a.external > .link-lead {
+  white-space: nowrap;
+}
+a.external .link-favicon {
   display: inline-block;
   width: 1em;
   height: 1em;
@@ -116,4 +120,11 @@ a.external > .link-favicon {
   .center > .page-header > .popover-hint > * {
     transition: none;
   }
+}
+
+// Embedded images (`![[x.webp|460]]`) sit alone in a paragraph and render inline, so a
+// narrower one hugged the left edge. Centre them; link favicons live inside <a> and are untouched.
+article p > img:only-child {
+  display: block;
+  margin-inline: auto;
 }
