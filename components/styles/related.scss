@@ -1,5 +1,13 @@
 // one line right under the separator Quartz draws at the end of every post: "Related: A · B".
-// The text and links keep the page's own colours (body text, internal links).
+// Styled like the breadcrumbs, the navigation at the top of the page: a dim label and plain
+// links without the highlight that links inside the post get.
 .related-posts {
   margin: 0 0 2rem;
+  color: var(--gray);
+
+  a.internal {
+    color: var(--secondary);
+    background-color: transparent;
+    font-weight: 600;
+  }
 }
