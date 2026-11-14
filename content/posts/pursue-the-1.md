@@ -9,6 +9,8 @@ tags:
 # old URL from before the posts/ and projects/ folders
 aliases:
   - pursue-the-1
+related:
+  - the-first-word-was-never-important
 ---
 
 A few weeks ago, two friends who run their own companies recommended Peter Thiel's *Zero to One*. I read it and it earned the reputation. It's sharp, contrarian, and full of lessons any founder should sit with.

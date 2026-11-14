@@ -6,8 +6,8 @@ import type {
 import { classNames, resolveRelative } from "@quartz-community/utils"
 import style from "./styles/related.scss"
 
-// A post lists its related posts by hand in frontmatter, and they render as a short list after
-// the body:
+// A post lists its related posts by hand in frontmatter, and they render as one quiet line
+// under a separator at the end of the post ("Related: A · B"):
 //
 //   related:
 //     - leave-no-state-behind
@@ -34,18 +34,6 @@ function findPage(allFiles: Page[], wanted: string): Page | undefined {
   )
 }
 
-// "Aug 17, 2026", the same format as the explorer. Uses the date Quartz resolved (frontmatter
-// `published` or `date`, else `created`), read as a calendar date like the explorer does.
-function formatPostDate(page: Page): string | null {
-  const date = page.dates?.published ?? page.dates?.created
-  if (!date) return null
-  const d = new Date(date)
-  return new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())).toLocaleDateString(
-    "en-US",
-    { timeZone: "UTC", year: "numeric", month: "short", day: "2-digit" },
-  )
-}
-
 export default (() => {
   const Related: QuartzComponent = ({ fileData, allFiles, displayClass }: QuartzComponentProps) => {
     const listed = (fileData.frontmatter as { related?: unknown } | undefined)?.related
@@ -63,25 +51,17 @@ export default (() => {
     })
 
     return (
-      <section class={classNames(displayClass, "related-posts")}>
-        <h3>Related posts</h3>
-        <ul>
-          {pages.map((page) => {
-            const frontmatter = (page.frontmatter ?? {}) as Record<string, unknown>
-            const date = formatPostDate(page)
-            const description = (frontmatter.description as string | undefined) ?? page.description
-            return (
-              <li>
-                <a class="internal" href={resolveRelative(fileData.slug!, page.slug!)}>
-                  <span class="related-title">{(frontmatter.title as string) ?? page.slug}</span>
-                  {date && <time class="related-date">{date}</time>}
-                </a>
-                {description && <p class="related-description">{description}</p>}
-              </li>
-            )
-          })}
-        </ul>
-      </section>
+      <p class={classNames(displayClass, "related-posts")}>
+        Related:{" "}
+        {pages.map((page, i) => (
+          <>
+            {i > 0 && " · "}
+            <a class="internal" href={resolveRelative(fileData.slug!, page.slug!)}>
+              {(page.frontmatter?.title as string | undefined) ?? page.slug}
+            </a>
+          </>
+        ))}
+      </p>
     )
   }
 

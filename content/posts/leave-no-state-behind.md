@@ -10,6 +10,7 @@ tags:
   - state
 related:
   - anatomy-of-a-self-improving-agent
+  - learnings-from-building-a-super-agent
 draft: false
 # old URL from before the posts/ and projects/ folders
 aliases:
