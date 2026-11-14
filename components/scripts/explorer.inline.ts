@@ -441,7 +441,16 @@ async function handleNavOrRender(e) {
       mobileExplorer.classList.remove("hide-until-loaded")
 
       if (mobileExplorer.checkVisibility && mobileExplorer.checkVisibility()) {
+        // checkVisibility() just resolved styles with the panel shown and not yet collapsed,
+        // so collapsing now would animate it sliding shut on every page load. Skip that one
+        // transition: the panel starts closed.
+        const content = explorer.querySelector(".explorer-content")
+        if (content) content.style.transition = "none"
         explorer.classList.add("collapsed")
+        if (content) {
+          content.getBoundingClientRect()
+          content.style.transition = ""
+        }
         explorer.setAttribute("aria-expanded", "false")
         document.documentElement.classList.remove("mobile-no-scroll")
       }
