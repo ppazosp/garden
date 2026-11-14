@@ -4,6 +4,7 @@ import { CSSResourceToStyleElement, JSResourceToScriptElement } from "../util/re
 import { googleFontHref, googleFontSubsetHref } from "../util/theme"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { unescapeHTML } from "../util/escape"
+import { bannerOgVariant, bannerUrl, ogImageSize } from "../../components/Banner"
 
 export default (() => {
   const Head: QuartzComponent = ({
@@ -32,7 +33,13 @@ export default (() => {
       fileData.slug === "404" ? url.toString() : joinSegments(url.toString(), fileData.slug!)
 
     const usesCustomOgImage = ctx.cfg.plugins.emitters.some((e) => e.name === "CustomOgImages")
-    const ogImageDefaultPath = `https://${cfg.baseUrl}/static/og-image.png`
+    // A page's banner (cropped JPEG from BannerImages) is its social preview; pages with
+    // `banner: none` or a remote banner fall back to the site-wide image.
+    const banner = bannerUrl(fileData.frontmatter as { banner?: string } | undefined)
+    const bannerOg = banner ? bannerOgVariant(banner) : null
+    const ogImageDefaultPath = bannerOg
+      ? `https://${cfg.baseUrl}${bannerOg}`
+      : `https://${cfg.baseUrl}/static/og-image.png`
 
     const coreStylesheet = css[0]?.content
     const coreScript = js.find(
@@ -76,8 +83,16 @@ export default (() => {
             <meta name="twitter:image" content={ogImageDefaultPath} />
             <meta
               property="og:image:type"
-              content={`image/${getFileExtension(ogImageDefaultPath) ?? "png"}`}
+              content={
+                bannerOg ? "image/jpeg" : `image/${getFileExtension(ogImageDefaultPath) ?? "png"}`
+              }
             />
+            {bannerOg && (
+              <>
+                <meta property="og:image:width" content={String(ogImageSize.width)} />
+                <meta property="og:image:height" content={String(ogImageSize.height)} />
+              </>
+            )}
           </>
         )}
 

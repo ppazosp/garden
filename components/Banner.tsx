@@ -19,6 +19,15 @@ export function bannerUrl(frontmatter: { banner?: string } | undefined): string 
   return banner.startsWith("/") || banner.startsWith("http") ? banner : `/${banner}`
 }
 
+// size of the social preview copy: the 1.91:1 card LinkedIn, X and Slack all render
+export const ogImageSize = { width: 1200, height: 630 }
+
+/** JPEG copy of a local raster banner for og:image; LinkedIn does not reliably render WebP. */
+export function bannerOgVariant(url: string): string | null {
+  if (url.startsWith("http") || !/\.(webp|png|jpe?g)$/i.test(url)) return null
+  return url.replace(/\.[^.]+$/, "-og.jpg")
+}
+
 /** Local raster banners get resized copies (`name-800.webp`, …); remote and SVG ones don't. */
 export function bannerVariant(url: string, width: number): string | null {
   if (url.startsWith("http") || !/\.(webp|png|jpe?g)$/i.test(url)) return null
