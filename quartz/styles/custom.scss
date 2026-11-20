@@ -86,14 +86,20 @@
   }
 }
 
-// favicon before external links (see components/LinkFavicons.ts)
-a.external > .link-favicon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  margin: 0 0.3em 0 0.05em;
-  vertical-align: -0.12em;
-  border-radius: 2px;
+// The icon sits in the first link fragment's padding, so the text can wrap normally.
+a.external:has(> .link-favicon) {
+  position: relative;
+  padding-inline-start: 1.35em;
+
+  > .link-favicon {
+    position: absolute;
+    inset-inline-start: 0.05em;
+    inset-block-start: 0.1em;
+    margin: 0;
+    width: 1em;
+    height: 1em;
+    border-radius: 2px;
+  }
 }
 
 // Navigation (see fadeOut/fadeIn in spa.inline.ts): the article text fades out while the next
@@ -116,4 +122,11 @@ a.external > .link-favicon {
   .center > .page-header > .popover-hint > * {
     transition: none;
   }
+}
+
+// Embedded images (`![[x.webp|460]]`) sit alone in a paragraph and render inline, so a
+// narrower one hugged the left edge. Centre them; link favicons live inside <a> and are untouched.
+article p > img:only-child {
+  display: block;
+  margin-inline: auto;
 }
