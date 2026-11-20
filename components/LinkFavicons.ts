@@ -1,6 +1,6 @@
 import fs from "fs"
 import path from "path"
-import type { Element, ElementContent, Root } from "hast"
+import type { Element, Root } from "hast"
 import { visit } from "unist-util-visit"
 import type { QuartzEmitterPlugin, QuartzTransformerPlugin } from "../quartz/plugins/types"
 import type { FilePath } from "../quartz/util/path"
@@ -58,24 +58,6 @@ function envelope(): Element {
   }
 }
 
-// Puts the icon in a no-wrap span with the link's first word, so a line can break inside a
-// long link but never between the icon and the text it belongs to.
-function prependIcon(link: Element, icon: Element) {
-  const [first, ...rest] = link.children
-  const lead: ElementContent[] = [icon]
-  if (first?.type === "text") {
-    const [, word, tail] = /^(\S*)([\s\S]*)$/.exec(first.value)!
-    lead.push({ type: "text", value: word })
-    if (tail) rest.unshift({ type: "text", value: tail })
-  } else if (first) {
-    lead.push(first)
-  }
-  link.children = [
-    { type: "element", tagName: "span", properties: { className: ["link-lead"] }, children: lead },
-    ...rest,
-  ]
-}
-
 function hostOf(href: unknown): string | null {
   if (typeof href === "string" && href.startsWith("mailto:")) return "mailto"
   if (typeof href !== "string" || !/^https?:\/\//.test(href)) return null
@@ -110,12 +92,12 @@ export const LinkFavicons: QuartzTransformerPlugin = () => ({
           // crawl-links opens external links in a new tab; for mail that's just an empty tab
           delete link.properties.target
           dropArrow(link)
-          prependIcon(link, envelope())
+          link.children.unshift(envelope())
           continue
         }
         if (!(await fetchIcon(host))) continue
         dropArrow(link)
-        prependIcon(link, {
+        link.children.unshift({
           type: "element",
           tagName: "img",
           properties: {
