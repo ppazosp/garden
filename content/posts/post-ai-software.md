@@ -1,5 +1,5 @@
 ---
-title: Post-AI software
+title: Be more ambitious
 date: 2026-11-14
 description: My DevFest Santiago talk, written down. Software has always been built and used by humans. Agents now build it, and are starting to use it. The next wave is agents building for agents, and it asks which parts of the path we only walked because we were the ones on it.
 banner: /static/hill.webp
@@ -67,7 +67,7 @@ Languages are just the clearest case. Here are some of the crazier ones I showed
 
 None of these is a recommendation, and most of them may turn out to be dead ends. That is fine. The point is the question behind all of them: what other systems that we keep building on top of could be rethought for an agent era?
 
-## Be more ambitious
+## The freedom to build differently
 
 Humans are not going away, and a lot of what we built for ourselves will stay, because we are staying too. But for the first time in a long while we can walk back down the path and check each turn, and the people building now have a real chance to take a different one.
 
