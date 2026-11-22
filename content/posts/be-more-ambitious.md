@@ -67,7 +67,7 @@ Languages are just the clearest case. Here are some of the crazier ones I showed
 
 None of these is a recommendation, and most of them may turn out to be dead ends. That is fine. The point is the question behind all of them: what other systems that we keep building on top of could be rethought for an agent era?
 
-## The freedom to build differently
+## Take a different turn
 
 Humans are not going away, and a lot of what we built for ourselves will stay, because we are staying too. But for the first time in a long while we can walk back down the path and check each turn, and the people building now have a real chance to take a different one.
 
