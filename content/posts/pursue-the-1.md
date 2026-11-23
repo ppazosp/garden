@@ -1,7 +1,7 @@
 ---
 title: Pursue the 1
 date: 2026-04-22
-description: Why 0→1 isn't a startup framework but a moral imperative, and why partial contributions still count.
+description: What it means to pursue 0→1 in my work, and why partial contributions still count.
 tags:
   - philosophy
   - mindset
@@ -15,16 +15,16 @@ related:
 
 A few weeks ago, two friends who run their own companies recommended Peter Thiel's *Zero to One*. I read it and it earned the reputation. It's sharp, contrarian, and full of lessons any founder should sit with.
 
-But one idea stayed with me longer than the rest, not because it taught me something new about startups, but because it gave me words for a mindset I already had and couldn't articulate. The core distinction of the book is between 0→1 (making something new) and 1→n (copying what works). Thiel uses it as a framework for building companies. I've been treating it as a framework for building a life.
+But one idea stayed with me longer than the rest, not because it taught me something new about startups, but because it gave me words for a mindset I already had and couldn't articulate. The core distinction of the book is between 0→1 (making something new) and 1→n (copying what works). Thiel uses it as a framework for building companies. I've been using it to think about what I want to contribute through my work.
 
 ![0 to 1 vs 1 to n diagram](../images/0to1.png)
 *From Zero to One, by Peter Thiel.*
 
 ## 0 to 1 is a moral claim
 
-The most meaningful thing a human being can do, I think, is push the species forward in some way. Not just survive, not just thrive personally, but leave the world with something it didn't have before. Most of what we do in a lifetime is maintenance: working, earning, raising families, resting. That kind of effort keeps the engine of society running, and none of it is worthless, but none of it actually moves us anywhere new. What moves us is 0→1: someone creating a thing that didn't exist, finding a truth nobody had seen, or solving a problem everyone had quietly decided was unsolvable. The people we still remember decades and centuries later tend to have one thing in common, which is that they took humanity somewhere it couldn't have gotten to on its own.
+The most meaningful thing I can do with my working life, I think, is push something forward. When I say 0→1, I mean opening up a possibility that people didn't have before. That can happen when someone builds a tool that makes a new kind of work possible, finds a truth nobody had seen, or solves a problem everyone had quietly decided was unsolvable.
 
-That doesn't make 1→n useless. On the contrary, it's what transforms a single breakthrough into something everyone can use, and the process of scaling an idea, distributing it, improving it, and making it boring is exactly how a 1 becomes part of daily life. But if you treat 1→n as the goal rather than as the fuel that funds the next leap, you've already settled. A life spent entirely on 1→n is a life spent keeping what already exists alive. That's a perfectly good way to live. It just doesn't add anything new to the pile.
+Going from 1 to n means taking something that works and making it available to more people. Someone has to scale it, distribute it, and make it usable in daily life. Along the way, they might run into a problem nobody has solved. Solving it can be a 0→1 of its own. I want to spend some of my working life looking for those problems.
 
 ## 0→1 is smaller than you think
 
@@ -44,7 +44,7 @@ So if you spend your life trying to reach your 0→1 and only get to 0.2, you ha
 
 ## n makes the next 1 possible
 
-If you take this argument too seriously, you run the risk of starting to look down on 1→n work, as if scaling, productizing, teaching, maintaining, and simplifying were somehow beneath the real work of creation. That would be a mistake. Today's novelty becomes tomorrow's infrastructure, and the whole process of that transformation is 1→n. The calculus that was once a breakthrough is now part of a high school curriculum. The database technology that used to take a PhD to understand is now a single import in someone's weekend project. That flattening of difficulty, that absorption of yesterday's frontier into today's baseline, is what makes the next frontier reachable at all. The thicker the layer of solved problems beneath your feet, the higher the next 0→1 can aim.
+If you take this argument too seriously, you run the risk of looking down on the work of scaling, productizing, teaching, maintaining, and simplifying, as if it were somehow beneath creation. That would be a mistake. Today's novelty becomes tomorrow's infrastructure as more people learn to use it. The calculus that was once a breakthrough is now part of a high school curriculum. The database technology that used to take a PhD to understand is now a single import in someone's weekend project. That flattening of difficulty, that absorption of yesterday's frontier into today's baseline, is what makes the next frontier reachable at all. The thicker the layer of solved problems beneath your feet, the higher the next 0→1 can aim.
 
 Every genuine leap stands on a tall, unglamorous tower of careful repetitive work, and most of your life will be spent adding bricks to that tower in one way or another. That's exactly as it should be. The mistake would be to confuse the tower for the view. The point of the tower is that it lets you, or someone who comes after you, see clearly enough to take a step nobody has taken before, and then the job becomes adding bricks again so that the next person can stand even higher.
 
